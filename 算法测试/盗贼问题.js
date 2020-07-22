@@ -10,3 +10,16 @@
     状态转移方程
     dp[i] = max(dp[i - 1], dp[i - 2] + nums[i])   i >= 3
 */
+
+var rob = function(nums) {
+    var oddSum = 0;
+    var evenSum = 0;
+    for(var i = 0;i<nums.length;i++){
+        if(i%2  == 0){
+            evenSum = Math.max(evenSum+nums[i],oddSum);
+        }else{
+            oddSum = Math.max(oddSum+nums[i],evenSum);
+        }
+    }
+    return Math.max(oddSum,evenSum);
+};
