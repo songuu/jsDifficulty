@@ -85,7 +85,7 @@ splitArray([1, 5, 6, 8, 9, 2]) */
   这个质因子p和下一个数字也组成一次划分的前，最小的划分数前是多少
   那肯定就是pflag[p]=min(dp[j-1])，其中num[j]的质因子包含了p
   那么我们暴力的递推就不需要这么弄了，我们每次只要找到质因子p，求出dp[i]=min(pflag[p]+1)，
-  这就代表了和上一个质数的位置jj组成[j,i]为1段，[0,...,j-1]自己再划分最小的划分数了
+  这就代表了和上一个质数的位置j组成[j,i]为1段，[0,...,j-1]自己再划分最小的划分数了
   那么维护就很好维护了，每次计算dp[i]前，先求出这个变量的所有质因子p，然后通过pflag[p]=min(pflag[p],dp[i-1])
 */
 
@@ -95,56 +95,69 @@ splitArray([1, 5, 6, 8, 9, 2]) */
  */
 const PN = 10 ** 6 + 1
 const PNSqrt = Math.sqrt(PN)
-var splitArray = function(nums) {
-    if((nums === null) || (nums.length === 0)) return 0
-    const prime = [] // 获取所有的质数
-    const isPrime = new Array(PN).fill(true) // 首先设置所有的数都是质数
-    for(let i = 2; i <= PNSqrt; i++) {
-        if(!isPrime[i]) continue
-        prime.push(i)
-        for(let j = i; j < PN; j += i) isPrime[j] = false 
-    }
-    const n = nums.length
-    const dp = new Array(n + 1).fill(n)
-    const has = [] // 找出可以被当前数整除的所有的质数
-    const pFlag = new Array(PN).fill(n)
-    dp[0] = 0
-    for(let i = 1; i <= n; i++) {
-        let x = nums[i - 1]
-        console.log(`这是第${i}次执行`)
-        console.log(`执行之前X的值为${x}`)
-        has.length = 0
-        for(let j = 0; j < prime.length; j++) {
-            const p = prime[j]
-            if(x < p) break; // 如果比当前素数还小，就直接退出循环
-            if((x % p) === 0) {
-                has.push(p)
-                while((x % p) === 0) x /= p // 去除所有的素数(可被素数除尽的数)
-            }
-        }
-        console.log(`执行之后X的值为${x}`)
-        if(x !== 1) has.push(x)
-        /**
-         * 基本递推公式: 一个数都没遍历的时候， dp[0] = 0
-         * 每遍历一个数x = nums[i], x要么跟[0, i -1]范围内的某个数组成一组, 要么
-         * 自己单独一组, 具体怎么选择, 看怎么选择结果最小。
-         * pFlag[p]记录的是在[0, i - 1]中， 我i遍历到i - 1为止,我前面的nums[i]有出现过质因数p, 我选择某一个位置t与i组成一组的情况下， dp[t - 1]的最小值。
-         * 这里一个数的某个质因数如果是前面多个数的质因数, 那么应该选择使得结果最小的那个位置 
-         * 
-         */
-        console.log(has)
-        for(let j = 0; j < has.length; j++) {
-            const p = has[j]
-            console.log(`当前执行的pFlag[p]的值为${pFlag[p]}，dp[i - 1]的值为${dp[i - 1]}`)
-            pFlag[p] = Math.min(pFlag[p], dp[i - 1])
-            console.log(`当前执行的dp[i]为${dp[i]}`)
-            dp[i] = Math.min(dp[i], pFlag[p] + 1)
-        }
-        console.log("========================>")
-    }
-    return dp[n]
-};
+var splitArray = function (nums) {
+  if (nums === null || nums.length === 0) return 0
 
-let a = splitArray([6,4,3,2,5,3])
+  // 找出一定范围内的所有的质数
+  const prime = [] // 获取所有的质数
+  const isPrime = new Array(PN).fill(true) // 首先设置所有的数都是质数
+  for (let i = 2; i <= PNSqrt; i++) {
+    if (!isPrime[i]) continue
+    prime.push(i)
+    for (let j = i; j < PN; j += i) isPrime[j] = false
+  }
 
-console.log(`最后的结果是${a}`)
+  const n = nums.length
+  const dp = new Array(n + 1).fill(n)
+  const has = [] // 找出可以被当前数整除的所有的质数
+  const pFlag = new Array(PN).fill(n)
+  dp[0] = 0
+  for (let i = 1; i <= n; i++) {
+    let x = nums[i - 1]
+    console.log(`这是第${i}次执行`)
+    console.log(`执行之前X的值为${x}`)
+    has.length = 0
+    for (let j = 0; j < prime.length; j++) {
+      const p = prime[j]
+      if (x < p) break // 如果比当前素数还小，就直接退出循环
+      if (x % p === 0) {
+        has.push(p)
+        while (x % p === 0) x /= p // 去除所有的素数(可被素数除尽的数)
+      }
+    }
+    console.log(`执行之后X的值为${x}`)
+    if (x !== 1) has.push(x)
+
+    /* 
+          找出【0，当前数据】之间的质数
+        */
+
+    /**
+     * 基本递推公式: 一个数都没遍历的时候， dp[0] = 0
+     * 每遍历一个数x = nums[i], x要么跟[0, i -1]范围内的某个数组成一组, 要么
+     * 自己单独一组, 具体怎么选择, 看怎么选择结果最小。
+     * pFlag[p]记录的是在[0, i - 1]中， 我i遍历到i - 1为止,我前面的nums[i]有出现过质因数p, 我选择某一个位置t与i组成一组的情况下， dp[t - 1]的最小值。
+     * 这里一个数的某个质因数如果是前面多个数的质因数, 那么应该选择使得结果最小的那个位置
+     *
+     */
+    console.log(has)
+    for (let j = 0; j < has.length; j++) {
+      const p = has[j]
+      console.log(
+        `当前执行的pFlag[p]的值为${pFlag[p]}，dp[i - 1]的值为${dp[i - 1]}`
+      )
+      pFlag[p] = Math.min(pFlag[p], dp[i - 1])
+      console.log(`执行前的dp[${i}]为${dp[i]}`)
+      dp[i] = Math.min(dp[i], pFlag[p] + 1)
+      console.log(`执行后的dp[${i}]为${dp[i]}`)
+    }
+    console.log('========================>')
+  }
+  console.log(dp)
+  return dp[n]
+}
+
+// let a = splitArray([6, 4, 3, 2, 5, 3])
+let b = splitArray([2, 7, 3, 2, 3, 5, 3])
+
+console.log(`最后的结果是${b}`)

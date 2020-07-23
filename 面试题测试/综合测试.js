@@ -68,3 +68,5 @@ const obj = {
 }
 
 const upperKeysObj = deepMapKeys(obj, (key) => key.toUpperCase())
+
+console.log(upperKeysObj)
