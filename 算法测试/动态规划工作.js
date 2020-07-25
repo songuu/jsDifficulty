@@ -11,7 +11,7 @@
   计算实现：
     首先按照结束时间进行排序
     opt(i) = 1. v(i) + opt(prev(i))
-             2. opt(i -1)
+             2. opt(i - 1)
     比较他们之间的最大值
     最大值及为最优解
     例子1:
@@ -37,10 +37,10 @@
     i = 2, pre(2) = 0, (opt(2) = 1) 小于 (opts(1) = 5) [1]
     i = 3, pre(3) = 0, opt(3) = 8 = v(3) [3]
     i = 4, pre(4) = opt(1) = 5, opt(4) = (4 = v(4)) + 5 = 9 [1,4] 
-    i = 5, pre(5) = 0, opt(3) = 6 小于 opts(4), opts(5) = 9 [1,4]
-    i = 6, pre(6) = opt(2), ((opt(6) = 3) + opts(2)) = 5 < opts(5) = 9 [1,4]  
-    i = 7, pre(7) = opt(3), opt(6) = 8 + 2 = 10
-    i = 8, pre(8) = pre(5), opts(5) + 4 = 13 > opts(7) = 10
+    i = 5, pre(5) = 0, opt(5) = 6 小于 opts(4), opts(5) = 9 [1,4]
+    i = 6, pre(6) = opt(2), ((opt(6) = 3) + opts(2)) = 4 < opts(5) = 9 [1,4]  
+    i = 7, pre(7) = opt(3), opt(6) = 8 + 2 = 10 [7]
+    i = 8, pre(8) = pre(5), opts(5) + 4 = 13 > opts(7) = 10 [1,4,8]
 
     => 13
 */
@@ -62,7 +62,7 @@ function search(dp, s) {
   }
 }
 
-/* var jobScheduling = function (startTime, endTime, profit) {
+var jobScheduling = function (startTime, endTime, profit) {
   // 构造新数组
   const jobs = []
   for (let i = 0; i < startTime.length; i += 1) {
@@ -86,9 +86,9 @@ function search(dp, s) {
   }
   // console.log(dp)
   return dp[dp.length - 1][1]
-} */
+}
 
-var jobScheduling = function (startTime, endTime, profit) {
+var jobScheduling1 = function (startTime, endTime, profit) {
   // 构造新数组
   const jobs = [];
   for (let i = 0; i < startTime.length; i += 1) {
@@ -104,24 +104,24 @@ var jobScheduling = function (startTime, endTime, profit) {
   let temp = 0;// jobs[i]startTime之前的最大收益
   for (let i = 0; i < jobs.length; i += 1) {
     for (let j = pos; j < i; j += 1) {
-      console.log(`比较的对象为${i}`)
       if (jobs[i][0] >= jobs[j][1]) {
         // 如果出现j不等于pos的情况，j必然大于pos，
         // 说明此前有一个工作没延续过，pos停止移动
         if (j === pos) { pos += 1; }
-        console.log(`执行之后的pos为${pos}`)
         temp = Math.max(temp, dp[j]);
 
         console.log(`当前最大的收益为${temp}`)
       }
     }
     dp.push(temp + jobs[i][2]);// 记录包含jobs[i]的最大收益
+    console.log(`当前的dp数组为`)
+    console.log(dp)
     res = Math.max(dp[i], res);
+    console.log(`当前的最大值为${res}`)
+    console.log(`=====================>第${i+1}次循环结束`);
   }
   return res;
 }
 
 // let a = jobScheduling([1, 2, 3, 3],[3, 4, 5, 6],[50, 10, 40, 70])
-let b = jobScheduling([1, 3, 0, 4, 3, 5, 6, 8], [4, 5, 6, 7, 8, 9, 10, 11], [5, 1, 8, 4, 6, 3, 2, 4])
-
-console.log(b)
+let b = jobScheduling1([1, 3, 0, 4, 3, 5, 6, 8], [4, 5, 6, 7, 8, 9, 10, 11], [5, 1, 8, 4, 6, 3, 2, 4])
