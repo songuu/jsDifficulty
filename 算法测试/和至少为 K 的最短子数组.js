@@ -53,11 +53,14 @@ function solution(A = [], K = 0) {
   while (j <= len) {
     console.log(`这是第${j}次执行!`)
     while (popArr.length !== 0 && sum[j] <= sum[popArr[popArr.length - 1]]) {
-      // 剔除前面比当前元素大的那个元素
+      // 剔除前面比当前元素大的那个元素（才能找到更小的区间的值）
       popArr.pop()
     }
     while (popArr.length !== 0 && sum[j] - sum[popArr[0]] >= K) {
       // 从头开始比较看是否更小的元素
+      console.log(
+        `每一次参与比较的res值为${res}和（j - popArr[0]）${j - popArr[0]}`
+      )
       res = Math.min(res, j - popArr[0])
       popArr.shift()
     }
@@ -65,8 +68,6 @@ function solution(A = [], K = 0) {
     popArr.push(j)
     j++
   }
-
-  console.log(`============>\n最后的sum组合为${popArr}`)
 
   if (res === len + 1) {
     return -1
