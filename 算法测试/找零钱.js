@@ -41,20 +41,39 @@ var coinChange = function (coins, amount) {
 
     for (let j = 1; j <= amount; j++) {
         for (let i = 0; i < coins.length; i++) {
-            /* if (j - coins[i] >= 0 && dp[j - coins[i]] !== -1) {
-                if (dp[j] == -1 || dp[j] > dp[j - coins[i]] + 1) {
-                    dp[j] = dp[j - coins[i]] + 1;
-                }
-            } */
-            if(coins[i] <= j) {
+            if (coins[i] <= j) {
                 dp[j] = Math.min(dp[j], dp[j - coins[i]] + 1);
             }
         }
     }
     return dp[amount] > amount ? -1 : dp[amount]
-    // return dp[amount]
 }
 
-let a = coinChange([1, 2, 5], 11)
+
+var coinChange1 = function (coins, amount) {
+    // 首先将所有的元素都置为-1（每个数都不存在的意思）
+    let dp = new Array(amount + 1).fill(-1);
+
+    // dp[0] = 0; 假设和为0的个数为0
+    dp[0] = 0;
+
+    // 遍历递推
+    for (let i = 0; i <= amount; i++) {
+        // 循环各个面值，找到dp[i]的最优解
+        for (let j = 0; j < coins.length; j++) {
+            // 递推条件
+            // i - coins[j] >= 0  意思就是coins[j]可组成i
+            // dp[i - coins[j]] !== -1 意思前面的dp可以达到
+            if (i - coins[j] >= 0 && dp[i - coins[j]] !== -1) {
+                if (dp[i] === -1 || dp[i] > dp[i - coins[j]] + 1) {
+                    dp[i] = dp[i - coins[j]] + 1
+                }
+            }
+        }
+    }
+    return dp[amount]
+}
+
+let a = coinChange1([1, 2, 5], 11)
 
 console.log(a)
