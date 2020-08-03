@@ -27,6 +27,10 @@ for (var i = 1; i <= b; i++) {
   d.push(c);
 }
 
+// 合成所有的组合
+
+console.log(d)
+
 var max = 0;
 var maxArr = [];
 for(let i of d) {
