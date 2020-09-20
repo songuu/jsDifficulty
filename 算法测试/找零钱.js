@@ -54,7 +54,7 @@ var coinChange1 = function (coins, amount) {
     // 首先将所有的元素都置为-1（每个数都不存在的意思）
     let dp = new Array(amount + 1).fill(-1);
 
-    // dp[0] = 0; 假设和为0的个数为0
+    // dp[0] = 0; 假设和为0的个数为0   金额0最优解为0
     dp[0] = 0;
 
     // 遍历递推
@@ -66,7 +66,7 @@ var coinChange1 = function (coins, amount) {
             // dp[i - coins[j]] !== -1 意思前面的dp可以达到
             if (i - coins[j] >= 0 && dp[i - coins[j]] !== -1) {
                 if (dp[i] === -1 || dp[i] > dp[i - coins[j]] + 1) {
-                    dp[i] = dp[i - coins[j]] + 1
+                    dp[i] = dp[i - coins[j]] + 1;
                 }
             }
         }
