@@ -10,8 +10,7 @@
 
 <body>
     <header>
-        <h1>无限滚动中的虚拟列表-防抖和节流(只渲染可视区域，dom元素可复用)</h1>
-        <!-- <h1>无限滚动中的虚拟列表(只渲染可视区域，dom元素可复用)</h1> -->
+        <h1>无限滚动中的虚拟列表</h1>
     </header>
     </article>
     <article class="d-part d-effect">
@@ -49,10 +48,12 @@
             </div>
         </div>
         <script>
+            /* 
+                出现的一个问题是当前显示的必须是指定相应的当个单个item的高度
+            */
             var item = document.querySelector('.viewArea .item');
             var container = document.querySelector('.container');
 
-            console.log(item);
             var start = 0; // 开始位置
             var pageSize = 10; // 每页展示的数据
             var total = 100000; //数据总长度
@@ -119,7 +120,6 @@
                 }
             }
             document.querySelector('.container').addEventListener('scroll', throttle(handleScroller(), 16, 500), false);
-            // document.querySelector('.container').addEventListener('scroll', handleScroller(), false);
         </script>
     </article>
     </div>
