@@ -9,6 +9,81 @@
  *   getIntersection([1, 7], [8, 9]); // null
  */
 
- const getIntersection = function() {
-   
- }
+/* 
+   两个数组的情况
+*/
+
+const intersection = function () {
+    var result = [];
+    var lists;
+
+    if (arguments.length === 1) {
+        lists = arguments[0];
+    } else {
+        lists = arguments;
+    }
+
+    let [a, b] = [...lists];
+
+    // return a.filter((v, i) => b.includes(v) && a.lastIndexOf(v) === i)
+};
+
+/* 
+    多个数组的情况
+*/
+const getIntersection = function () {
+    var result = [];
+    var lists;
+
+    if (arguments.length === 1) {
+        lists = arguments[0];
+    } else {
+        lists = arguments;
+    }
+
+
+    lists = [...lists];
+
+    let listA = lists.map(i => Math.min(i[0], i[1]))
+    let listB = lists.map(i => Math.max(i[0], i[1]))
+
+    if (Math.min(listB) >= Math.max(listA)) {
+
+    }
+    //let a = lists.reduce((a, b) => a.filter(c => b.includes(c)))
+}
+
+/* function intersection() {
+    var result = [];
+    var lists;
+
+    if (arguments.length === 1) {
+        lists = arguments[0];
+    } else {
+        lists = arguments;
+    }
+
+    for (var i = 0; i < lists.length; i++) {
+        var currentList = lists[i];
+        for (var y = 0; y < currentList.length; y++) {
+            var currentValue = currentList[y];
+            if (result.indexOf(currentValue) === -1) {
+                var existsInAll = true;
+                for (var x = 0; x < lists.length; x++) {
+                    if (lists[x].indexOf(currentValue) === -1) {
+                        existsInAll = false;
+                        break;
+                    }
+                }
+                if (existsInAll) {
+                    result.push(currentValue);
+                }
+            }
+        }
+    }
+    return result;
+} */
+
+let c = intersection([1, 6], [4, 9])
+console.log(c)
+getIntersection([5, 2], [4, 9], [3, 6])
