@@ -21,49 +21,51 @@
  */
 const permute = (nums) => {
   // 1. 设置结果集
-  const result = [];
+  const result = []
 
   // 2. 回溯
   const recursion = (path, set) => {
     // 2.1 设置回溯终止条件
     if (path.length === nums.length) {
-
       // 2.1.1 推入结果集
-      result.push(path.concat());
+      console.log("当前存在的path", path)
+      result.push(path.concat())
 
       // 2.1.2 终止递归
-      return;
+      return
     }
 
     // 2.2 遍历数组
     for (let i = 0; i < nums.length; i++) {
-
       // 2.2.1 必须是不存在 set 中的坐标
       if (!set.has(i)) {
-
         // 2.2.2 本地递归条件（用完记得删除）
-        path.push(nums[i]);
-        set.add(i);
+        path.push(nums[i])
+        set.add(i)
+
+        console.log('集合1', set)
 
         // 2.2.3 进一步递归
-        recursion(path, set);
+        recursion(path, set)
 
         // 2.2.4 回溯：撤回 2.2.2 的操作
-        path.pop();
-        set.delete(i);
+        path.pop()
+        set.delete(i)
+
+        console.log('集合2', set)
       }
     }
-  };
-  recursion([], new Set());
+  }
+  recursion([], new Set())
 
   // 3. 返回结果
-  return result;
-};
+  return result
+}
 
-/* 
-* 主要是将数组每一个元素都放在第一个位置进行排列
-* 回溯法
-*/
+/*
+ * 主要是将数组每一个元素都放在第一个位置进行排列
+ * 回溯法
+ */
 
 function permute1(nums) {
   let res = []
@@ -87,7 +89,7 @@ function perm(arr, p, q, res) {
 
 // 位置交换
 function swap(arr, p, q) {
-  [arr[p], arr[q]] = [arr[q], arr[p]]
+  ;[arr[p], arr[q]] = [arr[q], arr[p]]
 }
 
-console.log(permute1([1, 2, 3, 4, 5]));
+console.log(permute([1, 2, 3, 4, 5]))

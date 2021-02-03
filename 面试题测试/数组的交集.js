@@ -14,43 +14,49 @@
 */
 
 const intersection = function () {
-    var result = [];
-    var lists;
+  var result = []
+  var lists
 
-    if (arguments.length === 1) {
-        lists = arguments[0];
-    } else {
-        lists = arguments;
-    }
+  if (arguments.length === 1) {
+    lists = arguments[0]
+  } else {
+    lists = arguments
+  }
 
-    let [a, b] = [...lists];
+  let [a, b] = [...lists]
 
-    // return a.filter((v, i) => b.includes(v) && a.lastIndexOf(v) === i)
-};
+  // return a.filter((v, i) => b.includes(v) && a.lastIndexOf(v) === i)
+}
 
 /* 
     多个数组的情况
 */
 const getIntersection = function () {
-    var result = [];
-    var lists;
+  var result = {}
+  var lists
 
-    if (arguments.length === 1) {
-        lists = arguments[0];
-    } else {
-        lists = arguments;
+  if (arguments.length === 1) {
+    lists = arguments[0]
+  } else {
+    lists = arguments
+  }
+
+  lists = [...lists]
+
+  for (let i = 0; i < lists.length; i++) {
+    let min = Math.min(lists[i][0], lists[i][1])
+    let max = Math.max(lists[i][0], lists[i][1])
+    for (let j = min; j <= max; j++) {
+      if (result[j] >= 0) {
+        result[j]++
+      } else {
+        result[j] = 0
+      }
     }
+  }
 
-
-    lists = [...lists];
-
-    let listA = lists.map(i => Math.min(i[0], i[1]))
-    let listB = lists.map(i => Math.max(i[0], i[1]))
-
-    if (Math.min(listB) >= Math.max(listA)) {
-
-    }
-    //let a = lists.reduce((a, b) => a.filter(c => b.includes(c)))
+  let keys = Object.keys(result)
+  keys.filter((key) => result[key] == 2).map((key) => key - 0)
 }
 
 /* function intersection() {
@@ -84,6 +90,5 @@ const getIntersection = function () {
     return result;
 } */
 
-let c = intersection([1, 6], [4, 9])
-console.log(c)
+intersection([1, 6], [4, 9])
 getIntersection([5, 2], [4, 9], [3, 6])
