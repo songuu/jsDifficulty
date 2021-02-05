@@ -52,11 +52,15 @@ const getIntersection = function () {
       } else {
         result[j] = 0
       }
+
+      // result[j]=(result[j] || 0)+1 
     }
   }
 
   let keys = Object.keys(result)
-  keys.filter((key) => result[key] == 2).map((key) => key - 0)
+  keys = keys.filter((key) => result[key] == 2).map((key) => key - 0)
+
+  console.log(keys)
 }
 
 /* function intersection() {
@@ -91,4 +95,4 @@ const getIntersection = function () {
 } */
 
 intersection([1, 6], [4, 9])
-getIntersection([5, 2], [4, 9], [3, 6])
+getIntersection([1, 7], [8, 9])
