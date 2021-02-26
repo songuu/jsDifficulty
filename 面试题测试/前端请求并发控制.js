@@ -35,7 +35,7 @@ function sendRequest(urls, limit, callback) {
     return Promise.all(asyncList).then(callback);
 }
 
-async function sendRequest(urls, max) {
+async function sendRequest1(urls, max) {
     return new Promise(resolve => {
         const len = urls.length;
         let idx = 0;
