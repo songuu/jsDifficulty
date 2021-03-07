@@ -58,13 +58,6 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
       __VUE_I18N_FULL_INSTALL__: false,
       __INTLIFY_PROD_DEVTOOLS__: false,
     },
-    css: {
-      preprocessorOptions: {
-        less: {
-          javascriptEnabled: true,
-        },
-      },
-    },
     plugins: createVitePlugins(viteEnv, isBuild)
   }
 }
