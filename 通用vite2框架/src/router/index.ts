@@ -3,7 +3,7 @@ import type { App } from 'vue';
 
 import { createRouter, createWebHashHistory } from 'vue-router';
 
-import { basicRoutes } from './routes';
+import { basicRoutes } from './routers';
 
 // app router
 const router = createRouter({
@@ -16,3 +16,5 @@ const router = createRouter({
 export function setupRouter(app: App<Element>) {
     app.use(router);
 }
+
+export default router;

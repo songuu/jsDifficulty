@@ -5,6 +5,10 @@ import App from './App.vue';
 
 import router, { setupRouter } from '/@/router';
 
+import { setupStore } from '/@/store';
+
+import { setupGlobDirectives } from '/@/directives';
+
 import { isDevMode } from '/@/utils/env';
 
 (async () => {
@@ -16,16 +20,20 @@ import { isDevMode } from '/@/utils/env';
     // 初始化路由
     setupRouter(app);
 
-    await Promise.all([
-        // 保证路由初始化成功
-        router.isReady(),
-    ]);
+    // 初始化stores
+    setupStore(app);
+
+    // 初始化全局指令
+    setupGlobDirectives(app);
+
+    // 保证路由初始化成功
+    await router.isReady();
 
     app.mount('#app', true);
 
-    // The development environment takes effect
+    // 生产环境
     if (isDevMode()) {
-        app.config.performance = true;
+        // app.config.performance = true;
         window.__APP__ = app;
     }
 })();
