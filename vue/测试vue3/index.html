@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="./index.js"></script>
+
+    <script>
+        let state = reactive({
+            value: 1
+        })
+
+        watchEffect(() => {
+            document.body.innerHTML = ""
+            let node = document.createElement("div")
+
+            console.log(state)
+            window.state = state;
+
+            node.innerHTML = state.value;
+
+            document.body.appendChild(node)
+        })
+    </script>
+</body>
+</html>
