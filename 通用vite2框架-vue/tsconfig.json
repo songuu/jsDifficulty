@@ -23,12 +23,19 @@
     "types": [
       "vite/client"
     ],
+    "typeRoots": [
+      "./node_modules/@types/",
+      "./types"
+    ],
     "incremental": true,
     "noImplicitAny": false,
     "skipLibCheck": true,
     "paths": {
       "/@/*": [
         "src/*"
+      ],
+      "/#/*": [
+        "types/*"
       ]
     }
   },
@@ -36,7 +43,9 @@
     "src/**/*.ts",
     "src/**/*.d.ts",
     "src/**/*.tsx",
-    "src/**/*.vue"
+    "src/**/*.vue",
+    "types/**/*.d.ts",
+    "types/**/*.ts",
   ],
   "exclude": [
     "node_modules",

@@ -1,16 +1,12 @@
 import type { UserConfig, ConfigEnv } from 'vite';
 
 import { loadEnv } from 'vite';
-import { resolve } from 'path';
 
 import { createProxy } from './build/vite/proxy';
+import { createAlias } from './build/vite/alias';
 import { wrapperEnv } from './build/utils';
 import { createVitePlugins } from './build/vite/plugin';
 import { OUTPUT_DIR } from './build/constant';
-
-function pathResolve(dir: string) {
-  return resolve(__dirname, '.', dir);
-}
 
 export default ({ command, mode }: ConfigEnv): UserConfig => {
   const root = process.cwd();
@@ -27,16 +23,12 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
     base: VITE_PUBLIC_PATH,
     root,
     resolve: {
-      alias: [
-        {
-          find: /^\/@\//,
-          replacement: pathResolve('src') + '/',
-        },
-        {
-          find: /^\/#\//,
-          replacement: pathResolve('types') + '/',
-        },
-      ],
+      alias: createAlias([
+        // /@/xxxx => src/xxxx
+        ['/@/', 'src'],
+        // /#/xxxx => types/xxxx
+        ['/#/', 'types'],
+      ]),
     },
     server: {
       port: VITE_PORT,
