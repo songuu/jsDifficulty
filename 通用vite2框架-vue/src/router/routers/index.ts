@@ -1,6 +1,6 @@
 import type { AppRouteRecordRaw, AppRouteModule } from '/@/router/types';
 
-// import { PAGE_NOT_FOUND_ROUTE, REDIRECT_ROUTE } from '../constant';
+import { PAGE_NOT_FOUND_ROUTE, REDIRECT_ROUTE } from '/@/router/routes/basic';
 
 const modules = import.meta.globEager('./modules/**/*.ts');
 
@@ -15,8 +15,9 @@ Object.keys(modules).forEach((key) => {
     routeModuleList.push(...modList);
 });
 
-// export const asyncRoutes = [PAGE_NOT_FOUND_ROUTE, ...routeModuleList];
+export const asyncRoutes = [PAGE_NOT_FOUND_ROUTE, ...routeModuleList];
 
+// * 需要将登录和其他分开
 export const RootRoute: AppRouteRecordRaw = {
     path: '/',
     name: 'Root',
@@ -26,4 +27,13 @@ export const RootRoute: AppRouteRecordRaw = {
     },
 };
 
-export const basicRoutes = [RootRoute];
+export const LoginRoute: AppRouteRecordRaw = {
+    path: "/login",
+    name: PageEnum.BASE_LOGIN,
+    meta: {
+        title: '登陆',
+        ignoreAuth: false
+    }
+};
+
+export const basicRoutes = [RootRoute, LoginRoute, REDIRECT_ROUTE];
