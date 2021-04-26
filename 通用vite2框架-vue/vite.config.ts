@@ -1,12 +1,16 @@
 import type { UserConfig, ConfigEnv } from 'vite';
 
 import { loadEnv } from 'vite';
+import { resolve } from 'path';
 
 import { createProxy } from './build/vite/proxy';
-import { createAlias } from './build/vite/alias';
 import { wrapperEnv } from './build/utils';
 import { createVitePlugins } from './build/vite/plugin';
 import { OUTPUT_DIR } from './build/constant';
+
+function pathResolve(dir: string) {
+  return resolve(process.cwd(), '.', dir);
+}
 
 export default ({ command, mode }: ConfigEnv): UserConfig => {
   const root = process.cwd();
@@ -23,23 +27,29 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
     base: VITE_PUBLIC_PATH,
     root,
     resolve: {
-      alias: createAlias([
+      alias: [
         // /@/xxxx => src/xxxx
-        ['/@/', 'src'],
+        {
+          find: /\/@\//,
+          replacement: pathResolve('src') + '/',
+        },
         // /#/xxxx => types/xxxx
-        ['/#/', 'types'],
-      ]),
+        {
+          find: /\/#\//,
+          replacement: pathResolve('types') + '/',
+        },
+      ],
     },
     server: {
       port: VITE_PORT,
       proxy: createProxy(VITE_PROXY),
-      hmr: {
+      /* hmr: {
         overlay: true,
-      },
+      }, */
     },
     build: {
+      target: 'es2015',
       outDir: OUTPUT_DIR,
-      polyfillDynamicImport: VITE_LEGACY,
       terserOptions: {
         compress: {
           keep_infinity: true,
@@ -47,7 +57,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
         },
       },
       brotliSize: false,
-      chunkSizeWarningLimit: 1200,
+      chunkSizeWarningLimit: 1500,
     },
     define: {
       __VUE_I18N_LEGACY_API__: false,
