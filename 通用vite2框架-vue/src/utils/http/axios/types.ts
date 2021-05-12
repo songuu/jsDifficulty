@@ -9,6 +9,8 @@ export interface RequestOptions {
   formatDate?: boolean;
   //  是否处理请求结果
   isTransformRequestResult?: boolean;
+  // 是否返回原生响应头 比如：需要获取响应头时使用该属性
+  isReturnNativeResponse?: boolean;
   // 是否加入url
   joinPrefix?: boolean;
   // 请求地址设置
