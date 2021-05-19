@@ -1,3 +1,9 @@
+/*
+ * @Author: songyu
+ * @Date: 2021-02-03 09:01:10
+ * @LastEditor: songyu
+ * @LastEditTime: 2021-05-18 11:50:42
+ */
 /* 
 给定一个 没有重复 数字的序列，返回其所有可能的全排列。
 
@@ -28,7 +34,7 @@ const permute = (nums) => {
     // 2.1 设置回溯终止条件
     if (path.length === nums.length) {
       // 2.1.1 推入结果集
-      console.log("当前存在的path", path)
+      console.log('当前存在的path', path)
       result.push(path.concat())
 
       // 2.1.2 终止递归
