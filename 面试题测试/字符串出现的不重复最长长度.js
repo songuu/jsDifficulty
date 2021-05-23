@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2021-05-13 22:00:25
- * @LastEditTime: 2021-05-13 22:01:38
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-05-23 17:15:00
+ * @LastEditors: songyu
  * @Description: In User Settings Edit
  * @FilePath: \项目文件\jsDifficulty\面试题测试\字符串出现的不重复最长长度.js
  */
@@ -29,4 +29,21 @@ var lengthOfLongestSubstring = function (s) {
     return res
 };
 
-console.log(lengthOfLongestSubstring("1212122121"))
+// * 直接使用对象
+var lengthOfLongestSubstring1 = function (s) {
+    let map = {};
+    let i = -1
+    let res = 0
+    let n = s.length
+    for (let j = 0; j < n; j++) {
+        if (map[s[j]]) {
+            i = Math.max(i, map[s[j]])
+        }
+        res = Math.max(res, j - i)
+        map[s[j]] = j;
+    }
+    return res
+};
+
+
+console.log(lengthOfLongestSubstring1("12121221213"))
