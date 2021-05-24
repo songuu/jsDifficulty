@@ -151,7 +151,7 @@ export class VAxios {
 
   // 表单格式上传
   supportFormData(config: AxiosRequestConfig) {
-    const headers = this.options?.headers;
+    const headers = config.headers;
     const contentType = headers?.['Content-Type'] || headers?.['content-type'];
 
     if (

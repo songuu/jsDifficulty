@@ -1,4 +1,12 @@
-# react文件目录管理
+<!--
+ * @Author: songyu
+ * @Date: 2020-07-18 09:49:26
+ * @LastEditTime: 2021-05-19 20:41:02
+ * @LastEditors: songyu
+ * @Description: 
+ * @FilePath: \项目文件\jsDifficulty\通用框架设置\react和vue目录设置.md
+-->
+# react 16文件目录管理
 
 ```
 ├── build                   // webpack配置

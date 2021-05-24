@@ -1,12 +1,26 @@
 import type { UserConfig, ConfigEnv } from 'vite';
 
 import { loadEnv } from 'vite';
+import { resolve } from 'path';
 
 import { createProxy } from './build/vite/proxy';
-import { createAlias } from './build/vite/alias';
 import { wrapperEnv } from './build/utils';
 import { createVitePlugins } from './build/vite/plugin';
 import { OUTPUT_DIR } from './build/constant';
+
+import pkg from './package.json';
+import moment from 'moment';
+
+function pathResolve(dir: string) {
+  return resolve(process.cwd(), '.', dir);
+}
+
+
+const { dependencies, devDependencies, name, version } = pkg;
+const __APP_INFO__ = {
+  pkg: { dependencies, devDependencies, name, version },
+  lastBuildTime: moment().format('YYYY-MM-DD HH:mm:ss'),
+};
 
 export default ({ command, mode }: ConfigEnv): UserConfig => {
   const root = process.cwd();
@@ -15,7 +29,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
 
   const viteEnv = wrapperEnv(env);
 
-  const { VITE_PORT, VITE_PUBLIC_PATH, VITE_PROXY, VITE_DROP_CONSOLE, VITE_LEGACY } = viteEnv;
+  const { VITE_PORT, VITE_PUBLIC_PATH, VITE_PROXY, VITE_DROP_CONSOLE } = viteEnv;
 
   const isBuild = command === 'build';
 
@@ -23,23 +37,29 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
     base: VITE_PUBLIC_PATH,
     root,
     resolve: {
-      alias: createAlias([
+      alias: [
         // /@/xxxx => src/xxxx
-        ['/@/', 'src'],
+        {
+          find: /\/@\//,
+          replacement: pathResolve('src') + '/',
+        },
         // /#/xxxx => types/xxxx
-        ['/#/', 'types'],
-      ]),
+        {
+          find: /\/#\//,
+          replacement: pathResolve('types') + '/',
+        },
+      ],
     },
     server: {
       port: VITE_PORT,
       proxy: createProxy(VITE_PROXY),
-      hmr: {
+      /* hmr: {
         overlay: true,
-      },
+      }, */
     },
     build: {
+      target: 'es2015',
       outDir: OUTPUT_DIR,
-      polyfillDynamicImport: VITE_LEGACY,
       terserOptions: {
         compress: {
           keep_infinity: true,
@@ -47,12 +67,15 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
         },
       },
       brotliSize: false,
-      chunkSizeWarningLimit: 1200,
+      chunkSizeWarningLimit: 2000,
     },
     define: {
       __VUE_I18N_LEGACY_API__: false,
       __VUE_I18N_FULL_INSTALL__: false,
       __INTLIFY_PROD_DEVTOOLS__: false,
+
+      // 当前app信息显示
+      __APP_INFO__: JSON.stringify(__APP_INFO__)
     },
     plugins: createVitePlugins(viteEnv, isBuild)
   }

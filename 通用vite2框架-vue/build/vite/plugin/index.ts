@@ -14,9 +14,16 @@ import { configStyleImportPlugin } from './styleImport';
 import { configVisualizerConfig } from './visualizer';
 import { configImageminPlugin } from './imagemin';
 import { configWindiCssPlugin } from './windicss';
+import { configHmrPlugin } from './hmr';
 
 export function createVitePlugins(viteEnv: ViteEnv, isBuild: boolean) {
-  const { VITE_USE_IMAGEMIN, VITE_LEGACY, VITE_BUILD_COMPRESS } = viteEnv;
+  const {
+    VITE_USE_IMAGEMIN,
+    VITE_USE_MOCK,
+    VITE_LEGACY,
+    VITE_BUILD_COMPRESS,
+    VITE_BUILD_COMPRESS_DELETE_ORIGIN_FILE,
+  } = viteEnv;
 
   const vitePlugins: (Plugin | Plugin[])[] = [
     // have to
@@ -24,6 +31,9 @@ export function createVitePlugins(viteEnv: ViteEnv, isBuild: boolean) {
     // have to
     vueJsx(),
   ];
+
+  // 自定义热更新
+  !isBuild && vitePlugins.push(configHmrPlugin());
 
   // @vitejs/plugin-legacy
   VITE_LEGACY && isBuild && vitePlugins.push(legacy());
