@@ -2,8 +2,9 @@
  * @Author: songyu
  * @Date: 2021-05-24 17:54:15
  * @LastEditor: songyu
- * @LastEditTime: 2021-05-24 18:08:28
+ * @LastEditTime: 2021-05-24 21:46:13
  */
+// "pwwkew"
 function fn(str) {
   if (!str || typeof str !== 'string') {
     return ''
@@ -22,18 +23,36 @@ function fn(str) {
        * 2. arr非第一个元素
        * 3. 记录下当前开始和结束的位置
        */
+      console.log("当前所在的位置", i)
+      console.log("arr", arr)
+      console.log("开始标识符", start)
+      console.log("结束标识符", end)
       if (arr.length > end - start) {
         start = pos
         end = i
       }
-      arr.length = 0
+
+      console.log("交换开始标识符", start)
+      console.log("交换结束标识符", end)
+      console.log("当前所在的位置", pos)
       if (end - start === str.length || pos + 1 >= str.length - end + start) {
         break
+      } else {
+        arr.length = 0
       }
+      console.log("执行之后的index", index)
+
       i = pos = pos + index + 1
+
+      console.log("执行之后的i", i)
     }
   }
-  return str.substr(start, end)
+  console.log(arr)
+
+  console.log(start, end)
+  return str.substr(start, end).length
+  // return arr.length
+  // return end - start;
 }
 
 function maxStr(str) {
@@ -68,4 +87,38 @@ function maxStr(str) {
   }
 }
 
-console.log(fn('abcabc'))
+// * 字符串找最长的不重复子串
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var lengthOfLongestSubstring = function (s) {
+  var str = [], maxlength = 0;
+  for (var i = 0; i < s.length; i++) {
+    var index = str.indexOf(s[i]);
+    if (index > -1) {
+      str.splice(0, index + 1)
+    }
+    str.push(s[i]);
+    maxlength = Math.max(maxlength, str.length);
+  }
+  return maxlength;
+};
+
+var lengthOfLongestSubstring = function(s) {
+  var res = 0; // 用于存放当前最长无重复子串的长度
+  var str = ""; // 用于存放无重复子串
+  var len = s.length;
+  for(var i = 0; i < len; i++) {
+    var char = s.charAt(i);
+    var index = str.indexOf(char);
+    if(index === -1) {
+      str += char;
+      res = res < str.length ? str.length : res;
+    } else {
+      str = str.substr(index + 1) + char;
+    }
+  }
+  return res; 
+};
+console.log(fn("pwwkew"))
