@@ -2,7 +2,7 @@
  * @Author: songyu
  * @Date: 2021-02-03 09:01:10
  * @LastEditor: songyu
- * @LastEditTime: 2021-05-18 11:50:42
+ * @LastEditTime: 2021-05-25 17:52:28
  */
 /* 
 给定一个 没有重复 数字的序列，返回其所有可能的全排列。
@@ -34,9 +34,7 @@ const permute = (nums) => {
     // 2.1 设置回溯终止条件
     if (path.length === nums.length) {
       // 2.1.1 推入结果集
-      console.log('当前存在的path', path)
       result.push(path.concat())
-
       // 2.1.2 终止递归
       return
     }
@@ -44,12 +42,13 @@ const permute = (nums) => {
     // 2.2 遍历数组
     for (let i = 0; i < nums.length; i++) {
       // 2.2.1 必须是不存在 set 中的坐标
+      console.log('当前的i', i)
       if (!set.has(i)) {
         // 2.2.2 本地递归条件（用完记得删除）
         path.push(nums[i])
-        set.add(i)
 
-        console.log('集合1', set)
+        console.log('当前的path', path)
+        set.add(i)
 
         // 2.2.3 进一步递归
         recursion(path, set)
@@ -57,8 +56,6 @@ const permute = (nums) => {
         // 2.2.4 回溯：撤回 2.2.2 的操作
         path.pop()
         set.delete(i)
-
-        console.log('集合2', set)
       }
     }
   }
@@ -72,7 +69,6 @@ const permute = (nums) => {
  * 主要是将数组每一个元素都放在第一个位置进行排列
  * 回溯法
  */
-
 function permute1(nums) {
   let res = []
   perm(nums, 0, nums.length - 1, res)
@@ -98,4 +94,50 @@ function swap(arr, p, q) {
   ;[arr[p], arr[q]] = [arr[q], arr[p]]
 }
 
-console.log(permute([1, 2, 3, 4, 5]))
+// * 直接递归
+
+function permute2(nums) {
+  let result = []
+  function tap(arr) {
+    // * 当前的长度为传入数据的长度
+    if (arr.length == nums.length) {
+      result.push(arr)
+      return
+    }
+    for (let i = 0; i < nums.length; i++) {
+      if (!arr.includes(nums[i])) {
+        arr.push(nums[i]);
+        tap(arr.slice())
+        arr.pop(); // 回溯，撤销改变
+      }
+    }
+  }
+
+  tap([])
+
+  return result
+}
+
+
+function permute3(nums) {
+  let result = []
+  function tap(arr) {
+    // * 当前的长度为传入数据的长度
+    if (arr.length == nums.length) {
+      result.push(arr)
+      return
+    }
+    for (let i = 0; i < nums.length; i++) {
+      if (!arr.includes(nums[i])) {
+        arr.push(nums[i]);
+        tap(arr.slice())
+        arr.pop(); // 回溯，撤销改变
+      }
+    }
+  }
+
+  tap(nums)
+
+  return result
+}
+console.log(permute2([1, 2, 3, 4, 5]))

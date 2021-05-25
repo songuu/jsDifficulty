@@ -2,7 +2,7 @@
  * @Author: songyu
  * @Date: 2021-05-24 17:54:15
  * @LastEditor: songyu
- * @LastEditTime: 2021-05-24 21:46:13
+ * @LastEditTime: 2021-05-25 09:29:33
  */
 // "pwwkew"
 function fn(str) {
@@ -45,12 +45,13 @@ function fn(str) {
       i = pos = pos + index + 1
 
       console.log("执行之后的i", i)
+      console.log("执行之后的pos", pos)
     }
   }
   console.log(arr)
 
   console.log(start, end)
-  return str.substr(start, end).length
+  return str.substr(start, end)
   // return arr.length
   // return end - start;
 }
@@ -121,4 +122,31 @@ var lengthOfLongestSubstring = function(s) {
   }
   return res; 
 };
+
+function fn1(str) {
+  if (!str || typeof str !== 'string') {
+    return '';
+  }
+  var arr = [];
+  var pos = i = start = end = index = 0;
+  while (true) {
+    index = arr.indexOf(str[i]);
+    if (i < str.length && index === -1) {
+      arr.push(str[i]);
+      i++;
+
+    } else {
+      if (arr.length > end - start) {
+        start = pos;
+        end = i;
+      }
+      arr.length = 0;
+      if (end - start === str.length || pos + 1 >= str.length - end + start ) {
+        break;
+      }
+      i = pos = pos + index + 1;
+    }
+  }
+  return str.substr(start, end);
+}
 console.log(fn("pwwkew"))
