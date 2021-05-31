@@ -1,10 +1,10 @@
 /*
  * @Author: your name
  * @Date: 2021-05-15 17:07:29
- * @LastEditTime: 2021-05-15 17:29:03
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-05-31 22:04:01
+ * @LastEditors: songyu
  * @Description: In User Settings Edit
- * @FilePath: \项目文件\jsDifficulty\面试题测试\flat.js
+ * @FilePath: \项目文件\jsDifficulty\面试题测试\手写\flat.js
  */
 
 function flat(arr) {
@@ -28,7 +28,7 @@ function flat(arr) {
 
 function flatten(arr) {
     var res = [];
-    for (let i = 0, length = arr.length; i < length; i++) {
+    for (let i = 0, len = arr.length; i < len; i++) {
         if (Array.isArray(arr[i])) {
             res = res.concat(flatten(arr[i]));
         } else {
@@ -45,6 +45,6 @@ function flatten1(arr) {
     return arr;
 }
 
-let a = flat([1, [2, 3], [4, [5, [6]]]])
+let a = flatten1([1, [2, 3], [4, [5, [6]]]])
 
 console.log(a)
