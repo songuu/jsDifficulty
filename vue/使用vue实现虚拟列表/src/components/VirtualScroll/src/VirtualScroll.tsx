@@ -33,8 +33,8 @@ export default defineComponent({
   setup(props, { slots }) {
     const wrapElRef = ref<HTMLDivElement | null>(null);
     const state = reactive({
-      first: 0,
-      last: 0,
+      first: 0, // 当前视图范围内的开始
+      last: 0, // 当前视图范围内的结束
       scrollTop: 0,
     });
 
@@ -42,18 +42,22 @@ export default defineComponent({
       return parseInt(props.bench as string, 10);
     });
 
+    // * 计算单个模块的高度
     const getItemHeightRef = computed(() => {
       return parseInt(props.itemHeight as string, 10);
     });
 
+    // * 获取当前视窗第一个去渲染元素
     const getFirstToRenderRef = computed(() => {
       return Math.max(0, state.first - unref(getBenchRef));
     });
 
+    // * 获取当前视窗最后一个去渲染的元素
     const getLastToRenderRef = computed(() => {
       return Math.min((props.items || []).length, state.last + unref(getBenchRef));
     });
 
+    // * 获取整个列表需要的高度
     const getContainerStyleRef = computed((): CSSProperties => {
       return {
         height: convertToUnit((props.items || []).length * unref(getItemHeightRef)),
