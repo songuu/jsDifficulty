@@ -95,6 +95,7 @@ function commitRoot() {
   workInProgressRoot = null // 操作完后将workInProgressRoot重置
 }
 
+// 区分是组件还是真实的dom
 function commitDeletion(fiber, domParent) {
   if (fiber.dom) {
     // dom存在，是普通节点
@@ -105,6 +106,8 @@ function commitDeletion(fiber, domParent) {
   }
 }
 
+
+// 子 => 子兄弟 => 父 => 父兄弟
 function commitRootImpl(fiber) {
   if (!fiber) {
     return
