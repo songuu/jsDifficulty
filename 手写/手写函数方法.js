@@ -1,8 +1,8 @@
 /*
  * @Author: songyu
  * @Date: 2021-05-31 20:47:42
- * @LastEditTime: 2021-06-03 10:50:07
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-06-09 08:33:01
+ * @LastEditors: songyu
  * @Description:
  * @FilePath: \项目文件\jsDifficulty\面试题测试\手写\手写函数方法.js
  */
@@ -22,6 +22,17 @@ Function.prototype.apply = function (context = window, args) {
   return res
 }
 
+Function.prototype.myApply = function (context, args) {
+  if (!context || context === null) {
+    context = window;
+  }
+  // 创造唯一的key值  作为我们构造的context内部方法名
+  let fn = Symbol();
+  context[fn] = this;
+  // 执行函数并返回结果
+  return context[fn](...args);
+};
+
 Function.prototype.call = function (context = window, args) {
   if (typeof this !== 'function') {
     throw new TypeError('类型错误')
@@ -37,6 +48,17 @@ Function.prototype.call = function (context = window, args) {
 
   return res
 }
+
+Function.prototype.myCall = function (context, ...args) {
+  if (!context || context === null) {
+    context = window;
+  }
+  // 创造唯一的key值  作为我们构造的context内部方法名
+  let fn = Symbol();
+  context[fn] = this; //this指向调用call的函数
+  // 执行函数并返回结果 相当于把自身作为传入的context的方法进行调用了
+  return context[fn](...args);
+};
 
 Function.prototype.bind = function (context, ...args) {
   if (typeof this !== 'function') {

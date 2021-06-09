@@ -1,7 +1,7 @@
 /*
  * @Author: songyu
  * @Date: 2021-05-31 21:09:48
- * @LastEditTime: 2021-06-06 21:18:20
+ * @LastEditTime: 2021-06-09 08:48:30
  * @LastEditors: songyu
  * @Description: 
  * @FilePath: \项目文件\jsDifficulty\面试题测试\手写\函数柯里化.js
@@ -16,8 +16,7 @@ const curry = () => {
     }
 
     fn.toString = function () {
-        // return args.reduce((sum, cur) => sum + cur)
-        return args
+        return args.reduce((sum, cur) => sum + cur)
     }
 
     return fn;
@@ -39,7 +38,7 @@ function currying(fn, ...args) {
 
 const add = (a, b, c) => a + b + c;
 const a = currying(add, 1);
-// console.log(a(2,3))
+console.log(a(2,3))
 
-calculate(2)(3)('*')
-calculate(2)(3)('+')
+/* calculate(2)(3)('*')
+calculate(2)(3)('+') */
