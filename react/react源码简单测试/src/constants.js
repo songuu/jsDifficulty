@@ -1,8 +1,8 @@
 /*
  * @Author: songyu
  * @Date: 2021-06-14 21:20:35
- * @LastEditTime: 2021-06-14 21:58:10
- * @LastEditors: songyu
+ * @LastEditTime: 2021-06-15 10:12:35
+ * @LastEditors: Please set LastEditors
  * @Description: 
  * @FilePath: \项目文件\jsDifficulty\react\react源码简单测试\src\constants.js
  */
@@ -17,11 +17,11 @@ export const TAG_TEXT = Symbol.for("TAG_TEXT"); // 文本节点
 
 export const TAG_CLASS = Symbol.for("TAG_CLASS"); // 类组件
 
-export const Fragment = Symbol.for("FRAGMENT"); // fragment 
+export const FRAGMENT = Symbol.for("FRAGMENT"); // fragment 
 
-export const ForwardRef = Symbol.for("FORWARDREF"); // forwardRef
+export const FORWARDREF = Symbol.for("FORWARDREF"); // forwardRef
 
-export const HostPortal = Symbol.for("HOSTPORTAL"); // HostPortal
+export const HOSTPORTAL = Symbol.for("HOSTPORTAL"); // HostPortal
 
 // * fiber操作的类型
 export const PLACEMENT = Symbol.for("PLACEMENT");  // 插入

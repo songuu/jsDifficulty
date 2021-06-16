@@ -4,6 +4,9 @@ import {
     ELEMENT_TEXT,
     TAG_TEXT,
     TAG_CLASS,
+    FRAGMENT,
+    FORWARDREF,
+    HOSTPORTAL,
     PLACEMENT,
     DELETION,
     UPDATE
