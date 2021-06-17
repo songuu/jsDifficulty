@@ -1,6 +1,9 @@
-// Image resource files used to compress the output of the production environment
-// https://github.com/anncwb/vite-plugin-imagemin
-
+/*
+ * @Author: songyu
+ * @Date: 2021-04-26 09:53:38
+ * @LastEditor: songyu
+ * @LastEditTime: 2021-06-17 15:20:21
+ */
 import viteImagemin from 'vite-plugin-imagemin';
 
 export function configImageminPlugin() {

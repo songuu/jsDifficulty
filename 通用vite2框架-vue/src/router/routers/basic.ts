@@ -1,3 +1,9 @@
+/*
+ * @Author: songyu
+ * @Date: 2021-06-17 15:07:01
+ * @LastEditor: songyu
+ * @LastEditTime: 2021-06-17 16:06:51
+ */
 import type { AppRouteRecordRaw } from '/@/router/types';
 import { REDIRECT_NAME, LAYOUT, EXCEPTION_COMPONENT } from '/@/router/constant';
 
@@ -33,7 +39,7 @@ export const REDIRECT_ROUTE: AppRouteRecordRaw = {
     {
       path: '/redirect/:path(.*)',
       name: REDIRECT_NAME,
-      component: () => import('/@/views/sys/redirect/index.vue'),
+      component: () => import('/@/views/redirect/index.vue'),
       meta: {
         title: REDIRECT_NAME,
       },

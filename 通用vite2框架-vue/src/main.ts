@@ -1,3 +1,9 @@
+/*
+ * @Author: songyu
+ * @Date: 2021-06-17 15:00:01
+ * @LastEditor: songyu
+ * @LastEditTime: 2021-06-17 15:25:38
+ */
 import "windi.css";
 
 import { createApp } from 'vue';

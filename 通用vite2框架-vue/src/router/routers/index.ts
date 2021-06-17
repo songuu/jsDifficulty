@@ -1,6 +1,12 @@
+/*
+ * @Author: songyu
+ * @Date: 2021-06-17 15:07:01
+ * @LastEditor: songyu
+ * @LastEditTime: 2021-06-17 15:25:26
+ */
 import type { AppRouteRecordRaw, AppRouteModule } from '/@/router/types';
 
-import { PAGE_NOT_FOUND_ROUTE, REDIRECT_ROUTE } from '/@/router/routes/basic';
+import { PAGE_NOT_FOUND_ROUTE, REDIRECT_ROUTE } from './basic';
 
 const modules = import.meta.globEager('./modules/**/*.ts');
 

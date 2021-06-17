@@ -51,8 +51,16 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
       ],
     },
     server: {
+      host: true,
       port: VITE_PORT,
       proxy: createProxy(VITE_PROXY),
+      /* proxy: {
+        '/api': {
+          target: 'https://www.baidu.com',   //代理接口
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/api/, '')
+        }
+      } */
       /* hmr: {
         overlay: true,
       }, */
@@ -70,8 +78,6 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
       chunkSizeWarningLimit: 2000,
     },
     define: {
-      __VUE_I18N_LEGACY_API__: false,
-      __VUE_I18N_FULL_INSTALL__: false,
       __INTLIFY_PROD_DEVTOOLS__: false,
 
       // 当前app信息显示

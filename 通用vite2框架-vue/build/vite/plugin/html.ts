@@ -1,6 +1,8 @@
-/**
- * Plugin to minimize and use ejs template syntax in index.html.
- * https://github.com/anncwb/vite-plugin-html
+/*
+ * @Author: songyu
+ * @Date: 2021-04-26 09:53:38
+ * @LastEditor: songyu
+ * @LastEditTime: 2021-06-17 15:20:03
  */
 import type { Plugin } from 'vite';
 import type { ViteEnv } from '../../utils';

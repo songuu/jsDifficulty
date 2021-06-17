@@ -1,12 +1,12 @@
-// TODO
+/*
+ * @Author: songyu
+ * @Date: 2021-04-26 09:53:38
+ * @LastEditor: songyu
+ * @LastEditTime: 2021-06-17 15:21:35
+ */
 import type { GetManualChunk, GetManualChunkApi } from 'rollup';
 
-//
 const vendorLibs: { match: string[]; output: string }[] = [
-  // {
-  //   match: ['xlsx'],
-  //   output: 'xlsx',
-  // },
 ];
 
 // @ts-ignore

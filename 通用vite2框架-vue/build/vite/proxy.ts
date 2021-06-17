@@ -1,3 +1,9 @@
+/*
+ * @Author: songyu
+ * @Date: 2021-06-17 15:00:00
+ * @LastEditor: songyu
+ * @LastEditTime: 2021-06-17 15:21:44
+ */
 /**
  * Used to parse the .env.development proxy configuration
  */
@@ -26,7 +32,6 @@ export function createProxy(list: ProxyList = []) {
       changeOrigin: true,
       ws: true,
       rewrite: (path) => path.replace(new RegExp(`^${prefix}`), ''),
-      // https is require secure=false
       ...(isHttps ? { secure: false } : {}),
     };
   }

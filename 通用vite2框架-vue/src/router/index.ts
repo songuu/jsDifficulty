@@ -1,3 +1,9 @@
+/*
+ * @Author: songyu
+ * @Date: 2021-06-17 15:07:01
+ * @LastEditor: songyu
+ * @LastEditTime: 2021-06-17 15:18:48
+ */
 import type { RouteRecordRaw } from 'vue-router';
 import type { App } from 'vue';
 

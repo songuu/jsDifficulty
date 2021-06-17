@@ -1,8 +1,9 @@
-/**
- *  Introduces component library styles on demand.
- * https://github.com/anncwb/vite-plugin-style-import
+/*
+ * @Author: songyu
+ * @Date: 2021-04-26 09:53:38
+ * @LastEditor: songyu
+ * @LastEditTime: 2021-06-17 15:20:43
  */
-
 import styleImport from 'vite-plugin-style-import';
 
 export function configStyleImportPlugin() {
