@@ -2,7 +2,7 @@
  * @Author: songyu
  * @Date: 2021-06-22 09:08:00
  * @LastEditor: songyu
- * @LastEditTime: 2021-06-22 11:45:20
+ * @LastEditTime: 2021-06-24 17:54:29
  */
 
 /**
@@ -69,12 +69,6 @@ function deserialization(arr) {
   return res
 }
 
-let arr = [0, 'a', 1, 'b', 2, 'c', 3, 'e', 2, 'd', 1, 'x', 0, 'ff']
-
-/* let a = arr.reverse().reduce((pre, item) => ({ [item]: pre }), null)
-
-console.log(a)*/
-
 function deserialization1(arr) {
   let res = {}
 
@@ -128,9 +122,79 @@ function deserialization1(arr) {
 
   dfs(res, 0, arr)
 
-  return res;
+  return res
 }
 
-let res = deserialization1(arr)
+function deserialization2(arr) {
+  let obj = {}
+  let keys = {}
 
-console.log(res)
+  for (let i = 0; i < arr.length; i++) {
+    let item = arr[i]
+    if (typeof item === 'number') {
+      if (!keys[item]) {
+        keys[item] = []
+      }
+
+      let obj = {}
+
+      obj[arr[i + 1]] = i + 1
+
+      keys[item].push(obj)
+    }
+  }
+
+  // console.log(keys)
+
+  const setObj = function (newObj, index) {
+    let arr = keys[index]
+    let nextArr = keys[index + 1]
+
+    for (let i = 0; i < arr.length; i++) {
+      let key = arr[i]
+
+      console.log(key)
+
+      // newObj[key] = nextArr && i == 0 ? {} : null
+    }
+
+    // console.log(newObj)
+
+    if (nextArr) {
+      setObj(newObj[arr[0]], index + 1)
+    }
+  }
+
+  setObj(obj, 0)
+
+  return obj
+}
+
+let arr = [
+  0,
+  'a',
+  1,
+  'b',
+  2,
+  'c',
+  3,
+  'e',
+  2,
+  'd',
+  1,
+  'x',
+  1,
+  'y',
+  2,
+  'z',
+  0,
+  'ff',
+]
+
+/* let a = arr.reverse().reduce((pre, item) => ({ [item]: pre }), null)
+
+console.log(a)*/
+
+let res = deserialization2(arr)
+
+// console.log(res)
