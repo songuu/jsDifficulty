@@ -1,0 +1,14 @@
+.wrap {
+	*zoom: 1;
+}
+
+.wrap:before,
+.wrap:after {
+	content: "";
+	display: table;
+	font: 0/0 a;
+}
+
+.wrap:after {
+	clear: both;
+}

@@ -1,0 +1,6 @@
+{
+  "extends": "eslint-config-ali/typescript/react",
+  "rules": {
+    "no-console": 0
+  }
+}

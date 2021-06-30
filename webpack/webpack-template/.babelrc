@@ -1,0 +1,11 @@
+{
+  "presets": [
+    ["@babel/preset-env",{
+      // 不转换模块 tree-shaking
+      "modules": false
+    }]
+  ],
+  "plugins": [
+    "@babel/plugin-transform-runtime"
+  ]
+}

@@ -1,0 +1,28 @@
+$prefixForWebkit: true !default; //设置所有浏览器前缀问题
+$prefixForMozilla: true !default;
+$prefixForMicrosoft: true !default;
+$prefixForOpera: false !default;
+$prefixNo: true !default;
+@mixin prefixer($property, $value, $prefixes: o webkit) {
+    @each $prefix in $prefixes {
+        @if $prefix==webkit and $prefixForWebkit==true {
+            -webkit-#{$property}: $value;
+        }
+        @else if $prefix==moz and $prefixForMozilla==true {
+            -moz-#{$property}: $value;
+        }
+        @else if $prefix==ms and $prefixForMicrosoft==true {
+            -ms-#{$property}: $value;
+        }
+        @else if $prefix==o and $prefixForOpera==true {
+            -o-#{$property}: $value;
+        }
+    }
+    @if $prefixNo {
+        #{$property}: $value;
+    }
+}
+
+.flex {
+   @include prefixer(border-radius, 2px, webkit moz o ms) 
+}
