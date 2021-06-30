@@ -2,13 +2,15 @@
  * @Author: songyu
  * @Date: 2021-06-01 15:07:54
  * @LastEditor: songyu
- * @LastEditTime: 2021-06-02 13:06:32
+ * @LastEditTime: 2021-06-25 11:09:55
  */
 // * 声明React.createRef() 创建 ref类型
 const ref1: React.RefObject<HTMLDivElement> = React.createRef();
 
 const inputRef = React.createRef<Comp>();
 
+// 正常传入
+@connect()
 class TestScene extends React.Component<Props> {
   inputRef: React.RefObject<Comp>;
 

@@ -2,7 +2,7 @@
  * @Author: songyu
  * @Date: 2021-06-22 09:08:00
  * @LastEditor: songyu
- * @LastEditTime: 2021-06-24 17:54:29
+ * @LastEditTime: 2021-06-24 21:07:58
  */
 
 /**
@@ -102,10 +102,6 @@ function deserialization1(arr) {
       finalArr.push(cur.slice(indexArr[0]))
     }
 
-    // console.log(`当前的递归${n + 1}次, 结果是${finalArr}`)
-
-    // console.log(finalArr)
-
     finalArr.forEach((item, index) => {
       // * 获取值
       const val = cur[indexArr[index] + 1]
@@ -144,24 +140,28 @@ function deserialization2(arr) {
     }
   }
 
-  // console.log(keys)
-
   const setObj = function (newObj, index) {
     let arr = keys[index]
     let nextArr = keys[index + 1]
 
     for (let i = 0; i < arr.length; i++) {
-      let key = arr[i]
+      let key = Object.keys(arr[i])[0];
+      let value = arr[i][key]
 
-      console.log(key)
+      newObj[key] = nextArr && nextArr.some(item => {
+        let key1 = Object.keys(item)[0];
+        let value1 = item[key]
 
-      // newObj[key] = nextArr && i == 0 ? {} : null
+        if (value1 === value + 2) {
+          return true;
+        }
+
+        return false;
+      }) ? {} : null
     }
 
-    // console.log(newObj)
-
     if (nextArr) {
-      setObj(newObj[arr[0]], index + 1)
+      setObj(newObj, index + 1)
     }
   }
 
@@ -197,4 +197,4 @@ console.log(a)*/
 
 let res = deserialization2(arr)
 
-// console.log(res)
+console.log(res)

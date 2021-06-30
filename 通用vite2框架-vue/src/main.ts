@@ -2,7 +2,7 @@
  * @Author: songyu
  * @Date: 2021-06-17 15:00:01
  * @LastEditor: songyu
- * @LastEditTime: 2021-06-17 15:25:38
+ * @LastEditTime: 2021-06-30 17:47:04
  */
 import "windi.css";
 
@@ -10,6 +10,8 @@ import { createApp } from 'vue';
 import App from './App.vue';
 
 import router, { setupRouter } from '/@/router';
+
+import  {setupRouterGuard} from "/@/router/guard"
 
 import { setupStore } from '/@/store';
 
@@ -25,6 +27,9 @@ import { isDevMode } from '/@/utils/env';
 
     // 初始化路由
     setupRouter(app);
+
+    // 注册路由拦截器
+    setupRouterGuard(app);
 
     // 初始化stores
     setupStore(app);
