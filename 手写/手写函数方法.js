@@ -1,18 +1,10 @@
 /*
  * @Author: songyu
  * @Date: 2021-05-31 20:47:42
-<<<<<<< Updated upstream:手写/手写函数方法.js
-<<<<<<< Updated upstream:手写/手写函数方法.js
- * @LastEditTime: 2021-06-09 08:33:01
+ * @LastEditTime: 2021-07-05 21:11:33
  * @LastEditors: songyu
-=======
-=======
->>>>>>> Stashed changes:面试题测试/手写/手写函数方法.js
  * @LastEditTime: 2021-06-07 11:22:19
- * @LastEditors: Please set LastEditors
->>>>>>> Stashed changes:面试题测试/手写/手写函数方法.js
- * @Description:
- * @FilePath: \项目文件\jsDifficulty\面试题测试\手写\手写函数方法.js
+ * @FilePath: \项目文件\jsDifficulty\手写\手写函数方法.js
  */
 Function.prototype.apply = function (context = window, args) {
   if (typeof this !== 'function') {

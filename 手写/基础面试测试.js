@@ -2,19 +2,19 @@
  * @Author: songyu
  * @Date: 2021-06-13 11:45:12
  * @LastEditor: songyu
- * @LastEditTime: 2021-06-13 13:12:57
+ * @LastEditTime: 2021-07-06 11:48:20
  */
 // * 可选链
 const person = {
-	firstName: "Lydia",
-	lastName: "Hallie",
-	pet: {
-		name: "Mara",
-		breed: "Dutch Tulip Hound"
-	},
-	getFullName() {
-		return `${this.firstName} ${this.lastName}`;
-	}
+  firstName: "Lydia",
+  lastName: "Hallie",
+  pet: {
+    name: "Mara",
+    breed: "Dutch Tulip Hound",
+  },
+  getFullName() {
+    return `${this.firstName} ${this.lastName}`;
+  },
 };
 
 // console.log(person.pet?.name);
@@ -24,25 +24,25 @@ const person = {
 
 // * es7 中间的setter和getter
 const config = {
-	languages: [],
+  languages: [],
   get language() {
     return this.languages;
   },
-	set language(lang) {
-		return this.languages.push(lang);
-	}
+  set language(lang) {
+    return this.languages.push(lang);
+  },
 };
 
 console.log(config.language);
 
 // * hasOwnProperty
-const obj = { 1: 'a', 2: 'b', 3: 'c' }
-const set = new Set([1, 2, 3, 4, 5])
+const obj = { 1: "a", 2: "b", 3: "c" };
+const set = new Set([1, 2, 3, 4, 5]);
 
-obj.hasOwnProperty('1')
-obj.hasOwnProperty(1)
-set.has('1')
-set.has(1)
+obj.hasOwnProperty("1");
+obj.hasOwnProperty(1);
+set.has("1");
+set.has(1);
 
 // * defineProperty
 /* 
@@ -57,10 +57,11 @@ console.log(Object.keys(person));
 
 // * 箭头函数和普通函数
 function giveLydiaPizza() {
-  return "Here is pizza!"
+  return "Here is pizza!";
 }
 
-const giveLydiaChocolate = () => "Here's chocolate... now go hit the gym already."
+const giveLydiaChocolate = () =>
+  "Here's chocolate... now go hit the gym already.";
 
-console.log(giveLydiaPizza.prototype)
-console.log(giveLydiaChocolate.prototype)
+console.log(giveLydiaPizza.prototype);
+console.log(giveLydiaChocolate.prototype);

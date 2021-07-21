@@ -1,10 +1,10 @@
 /*
  * @Author: songyu
  * @Date: 2021-05-23 17:20:06
- * @LastEditTime: 2021-05-23 17:36:47
+ * @LastEditTime: 2021-07-08 22:28:59
  * @LastEditors: songyu
  * @Description: 
- * @FilePath: \项目文件\jsDifficulty\面试题测试\15三数之和.js
+ * @FilePath: \项目文件\jsDifficulty\算法测试\其他\15三数之和.js
  */
 /**
  * @param {number[]} nums
@@ -46,6 +46,6 @@ var threeSum = function (nums, target) {
     return res;
 };
 
-let nums = [-1, 0, 1, 2, -1, -4]
+let nums = [1, 5, 8, 8, 9, 10, 12]
 
-console.log(threeSum(nums, 0));
+console.log(threeSum(nums, 19));
