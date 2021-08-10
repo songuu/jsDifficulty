@@ -1,5 +1,5 @@
 // import OptimiazeCssAssetPlugin from "optimize-css-assets-webpack-plugin"; 在webpack中间被舍弃
-import cssAssetsWebpackPlugin from "css-assets-webpack-plugin";
+import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
 import { resolve } from "path/posix";
 import TerserPlugin from "terser-webpack-plugin";
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
@@ -25,7 +25,7 @@ module.export = {
     cacheDirectory: path.resolve(__dirname, "node_modules/.cac/webpack"),
   },
   optimization: {
-    useExports: true, // 只导出被使用的模块 tree-shaking
+    usedExports: true, // 只导出被使用的模块 tree-shaking
     minimize: true, // 启动压缩
     concatenateModules: true, // 模块合并
     minimizer: [
