@@ -1,0 +1,27 @@
+{
+    "compilerOptions": {
+        "target": "ES5",
+        "module": "CommonJS",
+        "noEmit": false,
+        "lib": ["ES5", "ScriptHost", "dom", "dom.iterable", "esnext"],
+        "jsx": "react",
+        "moduleResolution": "Node",
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "skipDefaultLibCheck": true,
+        "strict": true,
+        "allowJs": true,
+        "experimentalDecorators": true
+    },
+    "exclude": ["node_modules"],
+    "include": ["src/**/*"],
+    "paths": {
+        "actions": ["src/actions/"],
+        "utils": ["src/utils/"],
+        "components": ["src/components/"],
+        "store": ["src/store/"],
+        "constants": ["src/constants/"],
+        "pages": ["src/pages/"],
+        "api": ["src/api/"]
+    }
+}
