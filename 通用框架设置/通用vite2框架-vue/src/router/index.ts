@@ -9,11 +9,15 @@ import type { App } from 'vue';
 
 import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router';
 
-import { basicRoutes, LoginRoute } from './routers';
+import { basicRoutes } from './routers';
 
-import { REDIRECT_NAME } from './constant';
-
-const WHITE_NAME_LIST = [LoginRoute.name, REDIRECT_NAME];
+const WHITE_NAME_LIST: string[] = [];
+const getRouteNames = (array: any[]) =>
+  array.forEach((item) => {
+    WHITE_NAME_LIST.push(item.name);
+    getRouteNames(item.children || []);
+  });
+getRouteNames(basicRoutes);
 
 /* 
 * 需要区分的是history和hash模式

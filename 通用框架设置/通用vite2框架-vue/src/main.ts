@@ -15,15 +15,20 @@ import  {setupRouterGuard} from "/@/router/guard"
 
 import { setupStore } from '/@/store';
 
+import { setupI18n } from '/@/locales/setupI18n';
+
 import { setupGlobDirectives } from '/@/directives';
 
 import { isDevMode } from '/@/utils/env';
+
+import { registerGlobComp } from '/@/components/registerGlobComp';
+
 
 (async () => {
     const app = createApp(App);
 
     // 注册全局组件
-    // registerGlobComp(app);
+    registerGlobComp(app);
 
     // 初始化路由
     setupRouter(app);
@@ -38,13 +43,7 @@ import { isDevMode } from '/@/utils/env';
     setupGlobDirectives(app);
 
     // 保证路由初始化成功
-    await router.isReady();
+    // await router.isReady();
 
     app.mount('#app', true);
-
-    // 生产环境
-    if (isDevMode()) {
-        // app.config.performance = true;
-        window.__APP__ = app;
-    }
 })();

@@ -1,7 +1,7 @@
 // axios配置  可自行根据项目进行更改，只需更改该文件即可，其他文件可以不动
 
 import type { AxiosResponse } from 'axios';
-import type { CreateAxiosOptions, RequestOptions, Result } from './types';
+import type { CreateAxiosOptions, RequestOptions, Result } from '/#/axios';
 import { VAxios } from './Axios';
 import { AxiosTransform } from './axiosTransform';
 
@@ -134,6 +134,14 @@ const transform: AxiosTransform = {
     }
     return config;
   },
+
+  /**
+   * @description: 响应拦截器处理
+   */
+   responseInterceptors: (res: AxiosResponse<any>) => {
+    return res;
+  },
+
 
   /**
    * @description: 响应错误处理
