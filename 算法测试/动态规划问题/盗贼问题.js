@@ -13,29 +13,34 @@
 
 // 利用奇偶性（不相邻）
 var rob = function (nums) {
-  var oddSum = 0
-  var evenSum = 0
+  var oddSum = 0;
+  var evenSum = 0;
   for (var i = 0; i < nums.length; i++) {
     if (i % 2 == 0) {
-      evenSum = Math.max(evenSum + nums[i], oddSum)
+      evenSum = Math.max(evenSum + nums[i], oddSum);
     } else {
-      oddSum = Math.max(oddSum + nums[i], evenSum)
+      oddSum = Math.max(oddSum + nums[i], evenSum);
     }
   }
-  return Math.max(oddSum, evenSum)
-}
+  return Math.max(oddSum, evenSum);
+};
 
-var rob = function (nums) {
-  if (nums.length === 0) return 0
-  if (nums.length === 1) return nums[0]
-  let dp = new Array(nums.length).fill(0)
-  dp[0] = 0
-  dp[1] = nums[1]
-  dp[2] = Math.max(nums[0], nums[1])
+var rob1 = function(nums) {
+  const len = nums.length;
 
-  for (let i = 3; i < nums.length; ++i) {
-    dp1[i] = Math.max(dp1[i - 1], nums[i] + dp1[i - 2])
+  if(len === 0) return 0;
+  if(len === 1) return nums[0];
+
+  const dp = new Array(len).fill(0);
+
+  dp[0] = nums[0];
+  dp[1] = Math.max(nums[0], nums[1])
+
+  for(let i = 2;i < len;i++) {
+      dp[i] = Math.max(dp[i - 1], nums[i] + dp[i - 2])
   }
 
-  return dp[len]
-}
+  return dp[len - 1]
+};
+
+console.log(rob1([1, 2, 3, 1]));
