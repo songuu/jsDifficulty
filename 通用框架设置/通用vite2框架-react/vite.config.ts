@@ -1,13 +1,15 @@
-import type { UserConfig, ConfigEnv } from 'vite';
+import type { UserConfig, ConfigEnv } from "vite";
 
-import { loadEnv } from 'vite';
+import { loadEnv } from "vite";
 
-import { createProxy } from './build/vite/proxy';
-import { createAlias } from './build/vite/alias';
-import { wrapperEnv } from './build/utils';
-import { OUTPUT_DIR } from './build/constant';
+import { createProxy } from "./build/vite/proxy";
+import { createAlias } from "./build/vite/alias";
+import { wrapperEnv } from "./build/utils";
+import { OUTPUT_DIR } from "./build/constant";
 
-import reactRefresh from '@vitejs/plugin-react-refresh'
+import reactRefresh from "@vitejs/plugin-react-refresh";
+
+import vitePluginImp from 'vite-plugin-imp'
 
 export default ({ command, mode }: ConfigEnv): UserConfig => {
   const root = process.cwd();
@@ -16,19 +18,23 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
 
   const viteEnv = wrapperEnv(env);
 
-  const { VITE_PORT, VITE_PUBLIC_PATH, VITE_PROXY, VITE_DROP_CONSOLE, VITE_LEGACY } = viteEnv;
+  const {
+    VITE_PORT,
+    VITE_PUBLIC_PATH,
+    VITE_PROXY,
+    VITE_DROP_CONSOLE,
+    VITE_LEGACY,
+  } = viteEnv;
 
-  const isBuild = command === 'build';
+  const isBuild = command === "build";
 
   return {
     base: VITE_PUBLIC_PATH,
     root,
     resolve: {
       alias: createAlias([
-        // /@/xxxx => src/xxxx
-        ['/@/', 'src'],
-        // /#/xxxx => types/xxxx
-        ['/#/', 'types'],
+        ["/@/", "src"],
+        ["/#/", "types"],
       ]),
     },
     server: {
@@ -50,6 +56,26 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
       brotliSize: false,
       chunkSizeWarningLimit: 1200,
     },
-    plugins: [reactRefresh()]
-  }
-}
+    plugins: [
+      reactRefresh(),
+      vitePluginImp({
+        libList: [
+          {
+            libName: "antd",
+            style: (name) => `antd/lib/${name}/style/index.less`,
+          },
+        ],
+      }),
+    ],
+    css: {
+      preprocessorOptions: {
+        less: {
+          // 支持内联 JavaScript
+          javascriptEnabled: true,
+          // 重写 less 变量，定制样式
+          modifyVars: themeVariables
+        }
+      }
+    },
+  };
+};
