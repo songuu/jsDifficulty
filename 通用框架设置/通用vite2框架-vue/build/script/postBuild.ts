@@ -1,4 +1,5 @@
 // #!/usr/bin/env node
+
 import { runBuildConfig } from './buildConf';
 import chalk from 'chalk';
 
@@ -10,7 +11,7 @@ export const runBuild = async () => {
 
     // Generate configuration file
     if (!argvList.includes('disabled-config')) {
-      await runBuildConfig();
+      runBuildConfig();
     }
 
     console.log(`✨ ${chalk.cyan(`[${pkg.name}]`)}` + ' - build successfully!');
