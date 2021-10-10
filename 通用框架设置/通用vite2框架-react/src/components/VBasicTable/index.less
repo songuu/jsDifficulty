@@ -1,0 +1,21 @@
+@import 'styles/mixins.less';
+.vbasic-table {
+  padding: 8px;
+  background-color: #fff;
+  // 表格体滚动条样式
+  .ant-table-body,
+  .ant-table-content {
+    .scrollbar();
+  }
+  .rowBgColor {
+    background-color: #fafafa;
+  }
+
+  .rowHover {
+    &:hover {
+      > td {
+        background-color: #e3f4fc !important;
+      }
+    }
+  }
+}

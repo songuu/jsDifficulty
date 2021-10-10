@@ -1,81 +1,74 @@
-import type { UserConfig, ConfigEnv } from "vite";
+import { UserConfigExport, ConfigEnv } from 'vite'
+import reactRefresh from '@vitejs/plugin-react-refresh'
+import path from 'path'
+import styleImport from 'vite-plugin-style-import'
+import config, { EnvName } from './config'
+import lessToJS from 'less-vars-to-js'
+import fs from 'fs'
+import html from 'vite-plugin-html'
 
-import { loadEnv } from "vite";
+/** 获取环境变量 */
+const env: EnvName =
+  (process.argv[process.argv.length - 1] as EnvName) || 'development'
 
-import { createProxy } from "./build/vite/proxy";
-import { createAlias } from "./build/vite/alias";
-import { wrapperEnv } from "./build/utils";
-import { OUTPUT_DIR } from "./build/constant";
+/** 当前环境基础配置 */
+const base = config[env]
 
-import reactRefresh from "@vitejs/plugin-react-refresh";
+/** 自定义antd主题 */
+const themeVariables = lessToJS(
+  fs.readFileSync(
+    path.resolve(__dirname, './config/antd-variables.less'),
+    'utf8',
+  ),
+)
 
-import vitePluginImp from 'vite-plugin-imp'
-
-export default ({ command, mode }: ConfigEnv): UserConfig => {
-  const root = process.cwd();
-
-  const env = loadEnv(mode, root);
-
-  const viteEnv = wrapperEnv(env);
-
-  const {
-    VITE_PORT,
-    VITE_PUBLIC_PATH,
-    VITE_PROXY,
-    VITE_DROP_CONSOLE,
-    VITE_LEGACY,
-  } = viteEnv;
-
-  const isBuild = command === "build";
-
+// https://vitejs.dev/config/
+export default ({ command }: ConfigEnv): UserConfigExport => {
   return {
-    base: VITE_PUBLIC_PATH,
-    root,
+    base: base ? base.cdn : './',
     resolve: {
-      alias: createAlias([
-        ["/@/", "src"],
-        ["/#/", "types"],
-      ]),
-    },
-    server: {
-      port: VITE_PORT,
-      proxy: createProxy(VITE_PROXY),
-      hmr: {
-        overlay: true,
+      alias: {
+        root: path.resolve(__dirname, './'),
+        '@': path.resolve(__dirname, './src'),
+        views: path.resolve(__dirname, './src/views'),
+        store: path.resolve(__dirname, './src/store'),
+        utils: path.resolve(__dirname, './src/utils'),
+        hooks: path.resolve(__dirname, './src/hooks'),
+        assets: path.resolve(__dirname, './src/assets'),
+        styles: path.resolve(__dirname, './src/styles'),
+        apis: path.resolve(__dirname, './src/api'),
+        comps: path.resolve(__dirname, './src/components')
       },
     },
-    build: {
-      outDir: OUTPUT_DIR,
-      polyfillDynamicImport: VITE_LEGACY,
-      terserOptions: {
-        compress: {
-          keep_infinity: true,
-          drop_console: VITE_DROP_CONSOLE,
-        },
-      },
-      brotliSize: false,
-      chunkSizeWarningLimit: 1200,
-    },
-    plugins: [
-      reactRefresh(),
-      vitePluginImp({
-        libList: [
-          {
-            libName: "antd",
-            style: (name) => `antd/lib/${name}/style/index.less`,
-          },
-        ],
-      }),
-    ],
     css: {
       preprocessorOptions: {
         less: {
-          // 支持内联 JavaScript
+          modifyVars: themeVariables,
           javascriptEnabled: true,
-          // 重写 less 变量，定制样式
-          modifyVars: themeVariables
-        }
-      }
+        },
+      },
     },
-  };
-};
+    plugins: [
+      reactRefresh(),
+      styleImport({
+        libs: [
+          {
+            libraryName: 'antd',
+            esModule: true,
+            resolveStyle: name => {
+              return `antd/es/${name}/style/index`
+            },
+          },
+        ],
+      }),
+      html({
+        inject: {
+          data: {
+            title: 'title',
+          },
+        },
+        minify: true,
+      }),
+    ],
+  }
+}
