@@ -1,6 +1,7 @@
 import React, {
   useState,
   ChangeEventHandler,
+  ChangeEvent,
   forwardRef,
   useImperativeHandle,
   useRef,
@@ -82,7 +83,7 @@ const IconPicker: React.FC<IIconPickerProps> = forwardRef((props, ref) => {
   }, [IconPickerData, searchIcon])
 
   /** 处理搜索图标 */
-  const handleSearchIcon: ChangeEventHandler<HTMLInputElement> = e => {
+  const handleSearchIcon: ChangeEventHandler<HTMLInputElement> = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.trim()
     setSearchIcon(value)
   }
@@ -101,7 +102,7 @@ const IconPicker: React.FC<IIconPickerProps> = forwardRef((props, ref) => {
 
   /** 渲染图标列表 */
   const renderIconList = useMemo(() => {
-    return iconList.map((iconName, index) => {
+    return iconList.map((iconName: IconPickerName, index: number) => {
       return (
         <IconItem
           key={index}
@@ -116,7 +117,7 @@ const IconPicker: React.FC<IIconPickerProps> = forwardRef((props, ref) => {
   /** 暴露到组件外部 */
   useImperativeHandle<unknown, IconPrickerImperativeProps>(ref, () => {
     return {
-      openIconPicker: (handleSelected, iconName) => {
+      openIconPicker: (handleSelected, iconName: IconPickerName) => {
         selectedRef.current = handleSelected
         setSelectedIconName(iconName as any)
         setVisible(true)

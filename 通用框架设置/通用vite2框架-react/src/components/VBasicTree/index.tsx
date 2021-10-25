@@ -1,4 +1,4 @@
-import React, {ChangeEventHandler, useMemo, useState} from 'react'
+import React, {ChangeEvent, ChangeEventHandler, useMemo, useState} from 'react'
 import {Dropdown, Input, Tree, Menu, TreeProps, Empty} from 'antd'
 import Icon from 'comps/Icon'
 import classnames from 'classnames'
@@ -43,7 +43,7 @@ const VBasicTree: React.FC<IVBasicTreeProps> = props => {
   generateList(treeData, flattenData)
 
   /** 模糊搜索树中的子节点 */
-  const handleSearch: ChangeEventHandler<any> = e => {
+  const handleSearch: ChangeEventHandler<any> = (e: ChangeEvent<HTMLInputElement>) => {
     const {value} = e.target
     // 获取展开的keys数组
     const expandedKeys = getExpandeKeysInDataListByValue(
