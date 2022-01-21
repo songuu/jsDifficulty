@@ -54,4 +54,6 @@ String.prototype.colorRgb = function () {
 }
 
 '#fff'.colorRgb() // rgb(255,255,255)
-'#ffffff'.colorRgb() // rgb(255,255,255)
+let a = '#B59177'.colorRgb() // rgb(255,255,255)
+
+console.log(a)

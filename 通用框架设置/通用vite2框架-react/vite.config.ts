@@ -1,4 +1,17 @@
-import { UserConfigExport, ConfigEnv } from 'vite'
+import type { UserConfig, ConfigEnv } from 'vite';
+import { loadEnv } from 'vite';
+
+import lessToJS from 'less-vars-to-js'
+import fs from 'fs'
+import path from 'path'
+
+import styleImport from 'vite-plugin-style-import'
+
+import { createProxy } from './build/vite/proxy';
+import { createAlias } from './build/vite/alias';
+import { wrapperEnv } from './build/utils';
+import { OUTPUT_DIR } from './build/constant';
+
 import reactRefresh from '@vitejs/plugin-react-refresh'
 import path from 'path'
 import styleImport from 'vite-plugin-style-import'
@@ -7,9 +20,18 @@ import lessToJS from 'less-vars-to-js'
 import fs from 'fs'
 import html from 'vite-plugin-html'
 
-/** 获取环境变量 */
-const env: EnvName =
-  (process.argv[process.argv.length - 1] as EnvName) || 'development'
+/** 自定义antd主题 */
+const themeVariables = lessToJS(
+  fs.readFileSync(
+    path.resolve(__dirname, './build/antd-variables.less'),
+    'utf8',
+  ),
+)
+
+export default ({ command, mode }: ConfigEnv): UserConfig => {
+  const root = process.cwd();
+
+  const env = loadEnv(mode, root);
 
 /** 当前环境基础配置 */
 const base = config[env]
@@ -27,17 +49,32 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
   return {
     base: base ? base.cdn : './',
     resolve: {
-      alias: {
-        root: path.resolve(__dirname, './'),
-        '@': path.resolve(__dirname, './src'),
-        views: path.resolve(__dirname, './src/views'),
-        store: path.resolve(__dirname, './src/store'),
-        utils: path.resolve(__dirname, './src/utils'),
-        hooks: path.resolve(__dirname, './src/hooks'),
-        assets: path.resolve(__dirname, './src/assets'),
-        styles: path.resolve(__dirname, './src/styles'),
-        apis: path.resolve(__dirname, './src/api'),
-        comps: path.resolve(__dirname, './src/components')
+      alias: createAlias([
+        ['@', 'src'],
+        ['root', './'],
+        ['views', './src/views'],
+        ['store', './src/store'],
+        ['utils', './src/utils'],
+        ['hooks', './src/hooks'],
+        ['assets', './src/assets'],
+        ['styles', './src/styles'],
+        ['apis', './src/apis'],
+        ['comps', './src/components']
+      ]),
+    },
+    css: {
+      preprocessorOptions: {
+        less: {
+          modifyVars: themeVariables,
+          javascriptEnabled: true,
+        },
+      },
+    },
+    server: {
+      port: VITE_PORT,
+      proxy: createProxy(VITE_PROXY),
+      hmr: {
+        overlay: true,
       },
     },
     css: {
@@ -48,27 +85,16 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
         },
       },
     },
-    plugins: [
-      reactRefresh(),
-      styleImport({
-        libs: [
-          {
-            libraryName: 'antd',
-            esModule: true,
-            resolveStyle: name => {
-              return `antd/es/${name}/style/index`
-            },
-          },
-        ],
-      }),
-      html({
-        inject: {
-          data: {
-            title: 'title',
+    plugins: [reactRefresh(), styleImport({
+      libs: [
+        {
+          libraryName: 'antd',
+          esModule: true,
+          resolveStyle: name => {
+            return `antd/es/${name}/style/index`
           },
         },
-        minify: true,
-      }),
-    ],
+      ],
+    }),]
   }
 }

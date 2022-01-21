@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import * as types from '../action-types'
 import {RootActions} from '../actions'
 import {getLocale, setLocale} from '@/locales'
@@ -60,3 +61,14 @@ export default (state = initialState, action: RootActions): AppStateProps => {
       return state
   }
 }
+=======
+import { RootActions } from '../actions'
+
+export interface AppStateProps { }
+
+const initialState: AppStateProps = {}
+
+export default (state = initialState, action: RootActions): AppStateProps => {
+  return state
+}
+>>>>>>> Stashed changes

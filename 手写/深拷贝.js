@@ -39,25 +39,25 @@ const cloneDeep1 = (target, hash = new WeakMap()) => {
   return cloneTarget
 }
 
-
 function isObject(val) {
-  return typeof val === "object" && val !== null;
+  return typeof val === 'object' && val !== null
 }
 
+// * 可以解决循环引用的问题
 function deepClone(obj, hash = new WeakMap()) {
-  if (!isObject(obj)) return obj;
+  if (!isObject(obj)) return obj
   if (hash.has(obj)) {
-    return hash.get(obj);
+    return hash.get(obj)
   }
-  let target = Array.isArray(obj) ? [] : {};
-  hash.set(obj, target);
+  let target = Array.isArray(obj) ? [] : {}
+  hash.set(obj, target)
   Reflect.ownKeys(obj).forEach((item) => {
     if (isObject(obj[item])) {
-      target[item] = deepClone(obj[item], hash);
+      target[item] = deepClone(obj[item], hash)
     } else {
-      target[item] = obj[item];
+      target[item] = obj[item]
     }
-  });
+  })
 
-  return target;
+  return target
 }

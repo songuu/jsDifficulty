@@ -73,10 +73,16 @@ const mapStateToProps = (state: StoreStateProps) => ({
 const mapDispatchToProps = (dispatch: Dispatch) =>
   bindActionCreators(
     {
+<<<<<<< Updated upstream
       getUserinfo,
       toggleAppEnterLoading,
     },
     dispatch,
+=======
+      toggleAppEnterLoading,
+    },
+    dispatch
+>>>>>>> Stashed changes
   )
 
 type IProps = ReturnType<typeof mapStateToProps> &
