@@ -1,0 +1,102 @@
+<!doctype html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=gbk" />
+  <title>正在打开</title>
+  <meta name="description" content="IEG官网移动端微信OpenLink登录统一跳转" />
+  <script type="text/javascript" src="//ossweb-img.qq.com/images/js/mobile/milo.js"></script>
+  <script type="text/javascript" src="//ossweb-img.qq.com/images/js/safejump.js"></script>
+  <script type="text/javascript">
+    //获取UrlVar
+    document.domain = "qq.com";
+    function getUrlVar(name) { //获取url上某个参数的值
+      var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+      var r = window.location.search.substr(1).match(reg);
+      if (r != null) {
+        return decodeURIComponent(r[2]);
+      }
+      return '';
+    }
+    //获取cookie
+    function getCookie(sName, sDefaultValue) {
+      var sRE = "(?:; |^)" + sName + "=([^;]*);?";
+      var oRE = new RegExp(sRE);
+
+      if (oRE.test(document.cookie)) {
+        return decodeURIComponent(RegExp["$1"]);
+      } else {
+        return sDefaultValue || null;
+      }
+    }
+    //合法域名列表
+    var whiteDomain = ['qq.com'];//白名单
+    var blackDomain = ['p.imtt.qq.com'];//黑名单
+    var isLegalDomain = function (url) {
+      var isLegal = false;
+      var regStr = '^(https\\:\\/\\/|http\\:\\/\\/|\\/\\/|)([0-9a-z\-A-Z]+\\.)*reg(\\:[0-9]*){0,1}(\\/{1,2}.*){0,1}$';
+      var regWhite = null;
+      //判断白名单
+      for (var i = 0; i < whiteDomain.length; i++) {
+        regWhite = new RegExp(regStr.replace('reg', whiteDomain[i].replace(/\./g, '\\.')));
+        if (regWhite.test(url)) {
+          isLegal = true;
+        }
+      }
+      if (isLegal == false) {//不在白名单
+        return false;
+      }
+      //判断黑名单
+      var regBlack = null;
+      for (var i = 0; i < blackDomain.length; i++) {
+        regBlack = new RegExp(regStr.replace('reg', blackDomain[i].replace(/\./g, '\\.')));
+        if (regBlack.test(url)) {
+          isLegal = false;
+        }
+      }
+      return isLegal;
+    }
+    //增加xss过滤函数
+    var filterXSS = function (oriStr) {
+      if (!oriStr) {
+        return oriStr;
+      }
+      var charCodes = ['3c', '3e', '27', '22', '28', '29', '60', { format: 'script{}', chr: '3a' }];//要转义字符的16进制ASCII码[1<  2>  3'  4"  5(  6)  7`]
+      var xssChars = [], filterChars = [], tmpFormat = '{}', tmpChr;
+      for (var i = 0; i < charCodes.length; i++) {
+        if ('string' == typeof charCodes[i]) {
+          tmpFormat = '{}';
+          tmpChr = charCodes[i];
+        } else {
+          tmpFormat = charCodes[i].format;
+          tmpChr = charCodes[i].chr
+        }
+        xssChars.push(tmpFormat.replace('{}', '\\u00' + tmpChr));
+        xssChars.push(tmpFormat.replace('{}', '%' + tmpChr));//1次encode
+        xssChars.push(tmpFormat.replace('{}', '%25' + tmpChr));//2次encode
+        filterChars.push(tmpFormat.replace('{}', '&#x' + tmpChr + ';'));
+        filterChars.push(tmpFormat.replace('{}', '%26%23x' + tmpChr + '%3B'));//1次encode
+        filterChars.push(tmpFormat.replace('{}', '%2526%2523x' + tmpChr + '%253B'));//2次encode
+      }
+      for (var i = 0; i < xssChars.length; i++) {
+        oriStr = oriStr.replace(new RegExp(xssChars[i], 'gi'), filterChars[i]);
+      }
+      //预防script:
+      oriStr = oriStr.replace(/script[\u000d\u000a\u0020]+\:/, 'script&#x3a;');
+      return oriStr;
+    }
+    var urlReg = new RegExp("^((http|ftp|https):\\/\\/[\\w\\-_]+(\\.[\\w\\-_]+)+([\\w\\-\\.,@?^=%&amp;:/~\\+#]*[\\w\-\\@?^=%&amp;/~\\+#])?)$", 'i');
+    //跳转
+    var s_url = getUrlVar("s_url");
+    need("util.base64", function (Base64) {
+      if (s_url && (s_url = Base64.decode(s_url)) && urlReg.test(s_url)) {
+        safeJump.jump(s_url);
+      }
+    })
+
+  </script>
+</head>
+
+<body></body>
+
+</html>
+<!--[if !IE]>|xGv00|9ddeddf9f6fac7b504d68d92960eb3d7<![endif]-->
