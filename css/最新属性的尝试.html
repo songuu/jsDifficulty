@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Css 最新属性的尝试</title>
+  <style>
+    h2 {
+      color: red;
+    }
+
+    :is(div, p) :is(span, i) {
+      color: red;
+    }
+
+    :where(header, main, footer) p:hover {
+      color: red;
+      cursor: pointer;
+    }
+
+    .demo3 :is(div:has(.g-test-has)) {
+      border: 1px solid #000;
+    }
+
+    .demo3 .has-test:has(+ h2) {
+      margin-left: 24px;
+      border: 1px solid #000;
+    }
+  </style>
+</head>
+
+<body>
+  <section class="demo1">
+    <h1>:is 伪类选择器</h1>
+    <h2>
+      注意事项:
+      <ul>
+        <li>
+          不能用 :is() 来选取 ::before 和 ::after 两个伪元素
+        </li>
+        <li>
+          优先级是由它的选择器列表中优先级最高的选择器决定的
+        </li>
+      </ul>
+    </h2>
+    <h3>demo:</h3>
+    <div><i>div i</i></div>
+    <p><i>p i</i></p>
+    <div><span>div span</span></div>
+    <p><span>p span</span></p>
+    <h1><span>h1 span</span></h1>
+    <h1><i>h1 i</i></h1>
+  </section>
+  <br />
+  <section class="demo2">
+    <h1>:where 伪类选择器</h1>
+    <h2>
+      注意事项:
+      <ul>
+        <li>
+          where() 的优先级总是为 0
+        </li>
+      </ul>
+    </h2>
+    <h3>demo</h3>
+    <header>
+      <p>1</p>
+    </header>
+    <main>
+      <p>2</p>
+    </main>
+    <footer>
+      <p>3</p>
+    </footer>
+  </section>
+  <br />
+  <section class="demo3">
+    <h1>:has 伪类选择器</h1>
+    <h2>
+      注意事项:
+      <ul>
+        <li>
+          has() 的优先级总是为 0
+        </li>
+      </ul>
+    </h2>
+    <h3>demo1</h3>
+    <div>
+      <p>div -- p</p>
+    </div>
+    <div>
+      <p class="g-test-has">div -- p.has</p>
+    </div>
+    <div>
+      <p>div -- p</p>
+    </div>
+    <br />
+    <h3>demo2</h3>
+    <div class="has-test">div + p</div>
+    <p>p</p>
+
+    <div class="has-test">div + h1</div>
+    <h1>h1</h1>
+
+    <div class="has-test">div + h2</div>
+    <h2>h2</h2>
+
+    <div class="has-test">div + ul</div>
+    <ul>ul</ul>
+  </section>
+</body>
+
+</html>

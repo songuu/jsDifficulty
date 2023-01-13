@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>IntersectionObserver Example</title>
+  <style>
+    .container {
+      width: 100%;
+      overflow-x: scroll;
+      white-space: nowrap;
+      display: flex;
+    }
+
+    .item {
+      width: 200px;
+      height: 200px;
+      margin-right: 10px;
+      background-color: #ccc;
+    }
+
+    .nav-container {
+      position: relative;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+    }
+
+    .nav-container button {
+      padding: 10px 15px;
+      background-color: #3498db;
+      color: #fff;
+      border: 0;
+      cursor: pointer;
+      outline: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <!-- Items will be added here -->
+  </div>
+  <div class="nav-container">
+    <button id="prev">Previous</button>
+    <button id="next">Next</button>
+  </div>
+  <script>
+    var container = document.querySelector(".container");
+    var items = Array(20).fill().map(function (item, index) {
+      var itemElem = document.createElement("div");
+      itemElem.classList.add("item");
+      itemElem.innerHTML = index;
+      return itemElem;
+    });
+
+    var observer = new IntersectionObserver(function (entries, observer) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          // Get the next item to be shown
+          var nextItem = items.splice(0, 1)[0];
+          container.appendChild(nextItem);
+          if (items.length === 0) {
+            observer.unobserve(entry.target);
+          }
+        }
+      });
+    });
+
+    var currentIndex = 0;
+    var prevButton = document.getElementById("prev");
+    var nextButton = document.getElementById("next");
+
+    prevButton.addEventListener("click", function () {
+      if (currentIndex > 0) {
+        currentIndex--;
+        container.scrollLeft = container.children[currentIndex].offsetLeft - (container.offsetWidth - container.children[currentIndex].offsetWidth) / 2;
+      }
+    });
+
+    nextButton.addEventListener("click", function () {
+      if (currentIndex < container.children.length - 1) {
+        currentIndex++;
+        container.scrollLeft = container.children[currentIndex].offsetLeft - (container.offsetWidth - container.children[currentIndex].offsetWidth) / 2;
+      }
+    });
+
+    var loading = document.createElement("div");
+    loading.classList.add("loading");
+    container.appendChild(loading);
+    observer.observe(loading);
+    container.appendChild(items.shift());
+
+  </script>
+</body>
+
+</html>

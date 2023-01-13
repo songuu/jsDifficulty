@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>IntersectionObserver Example-03</title>
+  <style>
+    /* 动画样式 */
+    .animated {
+      height: 500px;
+      transition: transform 1s;
+      opacity: 0;
+    }
+
+    /* 目标元素类样式 */
+    .fade-in {
+      transform: translateY(20px);
+      opacity: 1;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="animated">This element will have an animation</div>
+  <div class="animated">This element will have an animation</div>
+  <div class="animated">This element will have an animation</div>
+
+  <script>
+    var animatedElements = [].slice.call(document.querySelectorAll(".animated"));
+
+    if ("IntersectionObserver" in window) {
+      var observer = new IntersectionObserver(function (entries, observer) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            var el = entry.target;
+            el.classList.add("fade-in");
+            observer.unobserve(el);
+          }
+        });
+      });
+
+      animatedElements.forEach(function (el) {
+        observer.observe(el);
+      });
+    }
+  </script>
+</body>
+
+</html>

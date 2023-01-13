@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>IntersectionObserver Example-01</title>
+</head>
+
+<body>
+  <img src="placeholder.jpg" data-src="image1.jpg" class="lazy-load" alt="Image 1">
+  <img src="placeholder.jpg" data-src="image2.jpg" class="lazy-load" alt="Image 2">
+  <img src="placeholder.jpg" data-src="image3.jpg" class="lazy-load" alt="Image 3">
+
+  <script>
+    var lazyImages = [].slice.call(document.querySelectorAll(".lazy-load"));
+
+    if ("IntersectionObserver" in window) {
+      var observer = new IntersectionObserver(function (entries, observer) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            var img = entry.target;
+            var src = img.getAttribute("data-src");
+            img.setAttribute("src", src);
+            img.classList.remove("lazy-load");
+            observer.unobserve(img);
+          }
+        });
+      });
+
+      lazyImages.forEach(function (img) {
+        observer.observe(img);
+      });
+    } else {
+      //如果浏览器不支持IntersectionObserver
+      lazyImages.forEach(function (img) {
+        var src = img.getAttribute("data-src");
+        img.setAttribute("src", src);
+      });
+    }
+  </script>
+</body>
+
+</html>
