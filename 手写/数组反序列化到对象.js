@@ -1,10 +1,3 @@
-/*
- * @Author: songyu
- * @Date: 2021-06-22 09:08:00
- * @LastEditor: songyu
- * @LastEditTime: 2021-06-24 21:07:58
- */
-
 /**
 * 描述：给定一个数组，将其按特定规则反序列化为对象
 * 示例：
@@ -37,6 +30,8 @@ function deserialization(arr) {
       }
     }
 
+    console.log('indexArr', indexArr)
+
     // * 保存的是最后清除的结果
     let finalArr = []
     if (indexArr.length > 1) {
@@ -51,12 +46,13 @@ function deserialization(arr) {
       finalArr.push(cur.slice(indexArr[0]))
     }
 
-    console.log(`当前的递归${n + 1}次, 结果是${finalArr}`)
-
-    console.log(finalArr)
+    console.log(`当前的递归${n + 1}次, 结果是`, finalArr)
 
     finalArr.forEach((item, index) => {
       const val = cur[indexArr[index] + 1]
+
+      console.log('item', item)
+      console.log('val', val)
       if (!item.includes(n + 1)) {
         pre[val] = null
       } else {
@@ -132,11 +128,11 @@ function deserialization2(arr) {
         keys[item] = []
       }
 
-      let obj = {}
+      let obj1 = {}
 
-      obj[arr[i + 1]] = i + 1
+      obj1[arr[i + 1]] = i + 1
 
-      keys[item].push(obj)
+      keys[item].push(obj1)
     }
   }
 
@@ -145,19 +141,23 @@ function deserialization2(arr) {
     let nextArr = keys[index + 1]
 
     for (let i = 0; i < arr.length; i++) {
-      let key = Object.keys(arr[i])[0];
+      let key = Object.keys(arr[i])[0]
       let value = arr[i][key]
 
-      newObj[key] = nextArr && nextArr.some(item => {
-        let key1 = Object.keys(item)[0];
-        let value1 = item[key]
+      newObj[key] =
+        nextArr &&
+        nextArr.some((item) => {
+          let key1 = Object.keys(item)[0]
+          let value1 = item[key]
 
-        if (value1 === value + 2) {
-          return true;
-        }
+          if (value1 === value + 2) {
+            return true
+          }
 
-        return false;
-      }) ? {} : null
+          return false
+        })
+          ? {}
+          : null
     }
 
     if (nextArr) {
@@ -170,31 +170,12 @@ function deserialization2(arr) {
   return obj
 }
 
-let arr = [
-  0,
-  'a',
-  1,
-  'b',
-  2,
-  'c',
-  3,
-  'e',
-  2,
-  'd',
-  1,
-  'x',
-  1,
-  'y',
-  2,
-  'z',
-  0,
-  'ff',
-]
+let arr = [0, 'a', 1, 'b', 2, 'c', 3, 'e', 2, 'd', 1, 'x', 0, 'ff', 3, 'dd']
 
 /* let a = arr.reverse().reduce((pre, item) => ({ [item]: pre }), null)
 
 console.log(a)*/
 
-let res = deserialization2(arr)
+let res = deserialization(arr)
 
-console.log(res)
+// console.log(res)

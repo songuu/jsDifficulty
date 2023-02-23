@@ -52,10 +52,14 @@ function solution(A = [], K = 0) {
   console.log(`当前的sum的结果为${sum}`)
   while (j <= len) {
     console.log(`这是第${j}次执行!`)
+    // 剔除大的
     while (popArr.length !== 0 && sum[j] <= sum[popArr[popArr.length - 1]]) {
       // 剔除前面比当前元素大的那个元素（才能找到更小的区间的值）
       popArr.pop()
     }
+
+    console.log(`当前的popArr为`, popArr)
+
     while (popArr.length !== 0 && sum[j] - sum[popArr[0]] >= K) {
       // 从头开始比较看是否更小的元素
       console.log(
@@ -69,11 +73,7 @@ function solution(A = [], K = 0) {
     j++
   }
 
-  if (res === len + 1) {
-    return -1
-  } else {
-    return res
-  }
+  return res === len + 1 ? -1 : res
 }
 
 let a = solution([2, -1, 2], 3)

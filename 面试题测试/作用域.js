@@ -1,11 +1,3 @@
-/*
- * @Author: your name
- * @Date: 2021-05-15 17:04:22
- * @LastEditTime: 2021-05-15 17:06:25
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \项目文件\jsDifficulty\面试题测试\作用域.js
- */
 // *  1
 window.name = 'ByteDance';
 

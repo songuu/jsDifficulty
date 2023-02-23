@@ -1,9 +1,3 @@
-/*
- * @Author: songyu
- * @Date: 2021-02-02 16:40:14
- * @LastEditor: songyu
- * @LastEditTime: 2021-05-24 17:44:33
- */
 Object.entries(
   [...document.querySelectorAll('*')]
     .map((v) => v.tagName)

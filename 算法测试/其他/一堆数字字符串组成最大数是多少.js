@@ -1,9 +1,3 @@
-/*
- * @Author: songyu
- * @Date: 2021-05-25 11:45:36
- * @LastEditor: songyu
- * @LastEditTime: 2021-05-25 14:14:00
- */
 // 一堆数字字符串组成最大数是多少[50, 2, 5, 9] => 95502 (贪心)
 function makeArrayBig(nums) {
   if (!nums || !Array.isArray(nums)) {

@@ -1,11 +1,3 @@
-/*
- * @Author: songyu
- * @Date: 2021-05-23 17:49:48
- * @LastEditTime: 2021-05-23 18:12:06
- * @LastEditors: songyu
- * @Description: 
- * @FilePath: \项目文件\jsDifficulty\面试题测试\18四数之和.js
- */
 /**
  * @param {number[]} nums
  * @param {number} target

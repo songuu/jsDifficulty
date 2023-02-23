@@ -1,9 +1,3 @@
-/*
- * @Author: songyu
- * @Date: 2021-06-03 11:30:23
- * @LastEditor: songyu
- * @LastEditTime: 2021-06-03 11:38:26
- */
 // * 使用动态规划 后一项数据 与 后一项数据与前一项数据的最大值 取其中的最大值
 function getMaxSum(arr) {
   if (!arr.length) return 0

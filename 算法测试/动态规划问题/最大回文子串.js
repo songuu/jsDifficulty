@@ -22,11 +22,11 @@
  * @return {number}
  */
 const countSubstrings = (s) => {
-    const len = s.length;
-    let count = 0;
-    const dp = new Array(len);
+  const len = s.length
+  let count = 0
+  const dp = new Array(len)
 
-    /* for (let j = 0; j < len; j++) {
+  /* for (let j = 0; j < len; j++) {
         for (let i = 0; i <= j; i++) {
             // 相等 && 挨着 或者 当前的后一个为回文
             if (s[i] == s[j] && (j - i <= 1 || dp[i + 1])) {
@@ -38,55 +38,66 @@ const countSubstrings = (s) => {
         }
     } */
 
-    for (let j = 0; j < len; j++) {
-        for (let i = 0; i <= j; i++) {
-            if (j == i) {
-                dp[i] = true;
-                count++;
-            } else if (j - i == 1 && s[i] == s[j]) {
-                dp[i] = true;
-                count++;
-            } else if (j - i > 1 && s[i] == s[j] && dp[i + 1]) {
-                dp[i] = true;
-                count++;
-            } else {
-                dp[i] = false;
-            }
-        }
+  for (let j = 0; j < len; j++) {
+    for (let i = 0; i <= j; i++) {
+      if (j == i) {
+        dp[i] = true
+        count++
+      } else if (j - i == 1 && s[i] == s[j]) {
+        dp[i] = true
+        count++
+      } else if (j - i > 1 && s[i] == s[j] && dp[i + 1]) {
+        dp[i] = true
+        count++
+      } else {
+        dp[i] = false
+      }
     }
-    return count;
-};
+  }
 
+  return count
+}
+
+/* 
+单个字符
+两个字符
+多于两个字符
+*/
 const countSubstrings1 = (s) => {
-    let count = 0;
-    const len = s.length;
+  let count = 0
+  const len = s.length
 
-    const dp = new Array(len);
-    for (let i = 0; i < len; i++) {
-        dp[i] = new Array(len).fill(false); // 二维矩阵
+  const dp = new Array(len)
+  for (let i = 0; i < len; i++) {
+    dp[i] = new Array(len).fill(false) // 二维矩阵
+  }
+  console.log('dp', dp)
+
+  // 使用的是矩阵的右上角
+
+  for (let j = 0; j < len; j++) {
+    for (let i = 0; i <= j; i++) {
+      if (i == j) {
+        // 单个字符的情况
+        dp[i][j] = true
+        count++
+      } else if (j - i == 1 && s[i] == s[j]) {
+        // 两个字符的情况
+        dp[i][j] = true
+        count++
+      } else if (j - i > 1 && s[i] == s[j] && dp[i + 1][j - 1]) {
+        console.log('i', i, 'j', j)
+        // 多于两个字符
+        dp[i][j] = true
+        count++
+      }
     }
+  }
 
-    // 使用的是矩阵的右上角
+  console.log('dp', dp)
+  return count
+}
 
-    for (let j = 0; j < len; j++) {
-        for (let i = 0; i <= j; i++) {
-            if (i == j) {   // 单个字符的情况
-                dp[i][j] = true;
-                count++;
-            } else if (j - i == 1 && s[i] == s[j]) { // 两个字符的情况 
-                dp[i][j] = true;
-                count++;
-            } else if (j - i > 1 && s[i] == s[j] && dp[i + 1][j - 1]) { // 多于两个字符
-                dp[i][j] = true;
-                count++;
-            }
-        }
-    }
-    return count;
-};
-
-
-let a = countSubstrings1("abc");
+let a = countSubstrings1('aaa')
 
 console.log(a)
-

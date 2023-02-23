@@ -1,11 +1,3 @@
-/*
- * @Author: songyu
- * @Date: 2021-05-31 21:22:43
- * @LastEditTime: 2021-06-24 17:19:31
- * @LastEditors: Please set LastEditors
- * @Description:
- * @FilePath: \项目文件\jsDifficulty\面试题测试\手写\复杂对象的扁平化.js
- */
 const obj1 = {
   a: {
     b: 1,
@@ -24,6 +16,9 @@ const obj1 = {
   ],
   c: 3,
 }
+
+let b = Object.prototype.toString.call(undefined)
+console.log(b)
 
 const isObj = (obj) => {
   return typeof obj === 'object' && obj !== null

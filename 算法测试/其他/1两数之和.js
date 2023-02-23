@@ -1,11 +1,3 @@
-/*
- * @Author: songyu
- * @Date: 2021-05-23 17:08:04
- * @LastEditTime: 2021-05-31 17:09:48
- * @LastEditors: Please set LastEditors
- * @Description:
- * @FilePath: \项目文件\jsDifficulty\面试题测试\两数之和.js
- */
 var twoSum = function (nums, target) {
   let len = nums.length
 

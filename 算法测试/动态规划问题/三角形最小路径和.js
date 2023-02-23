@@ -28,43 +28,44 @@
     dp[i][j] 代表的是i行j列代表的数
 */
 var minimumTotal = function (triangle) {
-    if (triangle.length === 0) {
-        return 0;
-    }
+  if (triangle.length === 0) {
+    return 0
+  }
 
-    let dp = [];
+  let dp = []
 
-    for (let i = 0; i < triangle.length; i++) {
-        dp[i] = new Array(triangle[i].length).fill(0)
-    }
+  for (let i = 0; i < triangle.length; i++) {
+    dp[i] = new Array(triangle[i].length).fill(0)
+  }
 
-    /* 
+  /* 
         dp的每个位置都是“和”
         从下往上 最后一行就是传入数组的最后一行  最后一行不被影响
     */
-    for (let i = 0; i < dp.length; i++) {
-        dp[dp.length - 1][i] = triangle[dp.length - 1][i];
-    }
+  for (let i = 0; i < dp.length; i++) {
+    dp[dp.length - 1][i] = triangle[dp.length - 1][i]
+  }
 
-    for (let i = dp.length - 2; i >= 0; i--) {
-        for (let j = 0; j < dp[i].length; j++) {
-            dp[i][j] = Math.min(dp[i + 1][j], dp[i + 1][j + 1]) + triangle[i][j];
-        }
+  for (let i = dp.length - 2; i >= 0; i--) {
+    for (let j = 0; j < dp[i].length; j++) {
+      dp[i][j] = Math.min(dp[i + 1][j], dp[i + 1][j + 1]) + triangle[i][j]
     }
+  }
 
-    return dp[0][0]
-};
+  return dp[0][0]
+}
 
 // 意思就是下一行与上一行的结果无关
 var minimumTotal1 = function (triangle) {
-    var dp = new Array(triangle.length + 1).fill(0);
-    for (var i = triangle.length - 1; i >= 0; i--) {
-        for (var j = 0; j < triangle[i].length; j++) {
-            dp[j] = Math.min(dp[j], dp[j + 1]) + triangle[i][j];
-        }
-    }
-    return dp[0];
-};
+  var dp = new Array(triangle.length + 1).fill(0)
 
-let a = minimumTotal([[2], [3, 4], [6, 5, 7], [4, 1, 8, 3]])
+  for (var i = triangle.length - 1; i >= 0; i--) {
+    for (var j = 0; j < triangle[i].length; j++) {
+      dp[j] = Math.min(dp[j], dp[j + 1]) + triangle[i][j]
+    }
+  }
+  return dp[0]
+}
+
+let a = minimumTotal1([[2], [3, 4], [6, 5, 7], [4, 1, 8, 3]])
 console.log(a)

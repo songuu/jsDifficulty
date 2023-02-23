@@ -59,6 +59,7 @@ var findMedianSortedArrays1 = function (nums1, nums2) {
   const n = nums2.length
   let low = 0
   let high = m
+
   while (low <= high) {
     const i = low + Math.floor((high - low) / 2)
     const j = Math.floor((m + n + 1) / 2) - i

@@ -1,9 +1,3 @@
-/*
- * @Author: songyu
- * @Date: 2020-07-15 15:27:08
- * @LastEditor: songyu
- * @LastEditTime: 2021-06-03 11:16:45
- */
 function limitLoad(urls, handler, limit) {
   let sequence = [].concat(urls) // 复制urls
   // 这一步是为了初始化 promises 这个"容器"
@@ -48,11 +42,13 @@ function limitLoad1(urls, handler, limit) {
     urlObj[i] = urls.slice(i * limit, (i + 1) * limit)
   }
 
+  console.log("urlObj", urlObj)
+
   function send() {
     urlObj[curIndex] &&
       Promise.all(urlObj[curIndex])
         .then((res) => {
-          console.log(res, `第${curIndex}批请求成功`)
+          console.log(res, `第${curIndex + 1}批请求成功`)
           curIndex++
           if (times === curIndex) {
             handler()

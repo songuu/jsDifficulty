@@ -1,11 +1,7 @@
-/*
- * @Author: songyu
- * @Date: 2021-07-04 17:23:12
- * @LastEditTime: 2021-07-04 17:34:11
- * @LastEditors: songyu
- * @Description:
- * @FilePath: \项目文件\jsDifficulty\面试题测试\满负荷请求池.js
- */
+/* 
+* 字节面试
+*/
+
 var urls = [
   "http://jsonplaceholder.typicode.com/posts/1",
   "http://jsonplaceholder.typicode.com/posts/2",

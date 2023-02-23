@@ -35,3 +35,17 @@ LRUCache.prototype.put = function (key, value) {
     }
     this.cache.set(key, value);
 };
+
+const a = new LRUCache(2);
+
+a.put(1, 1);
+
+a.put(2, 2);
+
+console.log(a.get(1));
+
+a.put(3, 3);
+
+a.put(4, 4);
+
+console.log(a.get(1));

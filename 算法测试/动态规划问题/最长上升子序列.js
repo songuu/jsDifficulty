@@ -68,8 +68,6 @@ var lengthOfLIS1 = function (nums) {
       LIS = dp[i]
     }
   }
-
-  console.log(dp)
   return LIS
 }
 
@@ -118,13 +116,40 @@ var lengthOfLIS2 = function (nums) {
     }
   }
 
-  dp.sort((a, b) => a - b)
+  // dp.sort((a, b) => a - b)
 
   console.log(dp)
 
   return dp.length
 }
 
-let a = lengthOfLIS([10, 9, 2, 5, 3, 7, 101, 18])
+function lengthOfLIS3(nums) {
+  if (nums.length === 0) {
+    return 0
+  }
+  let tails = []
+  let size = 0
+  for (let i = 0; i < nums.length; i++) {
+    let left = 0
+    let right = size
+    while (left < right) {
+      let mid = Math.floor((left + right) / 2)
+      if (tails[mid] < nums[i]) {
+        left = mid + 1
+      } else {
+        right = mid
+      }
+    }
+
+    tails[left] = nums[i]
+    if (left === size) {
+      size++
+    }
+  }
+
+  return size
+}
+
+let a = lengthOfLIS3([10, 9, 2, 5, 3, 7, 101, 18])
 
 console.log(a)

@@ -10,51 +10,51 @@
 */
 
 var rob = function (nums) {
-    if (nums.length === 0) return 0;
-    if (nums.length === 1) return nums[0]
-    let dp1 = new Array(nums.length).fill(0);
-    let dp2 = new Array(nums.length).fill(0);
-    dp1[0] = 0
-    dp2[0] = 0
-    dp1[1] = nums[0]
-    dp2[1] = nums[1]
-    for (let i = 2; i < nums.length; ++i) {
-        dp1[i] = Math.max(dp1[i - 1], nums[i - 1] + dp1[i - 2]);
-    }
-    for (let i = 2; i < nums.length; ++i) {
-        dp2[i] = Math.max(dp2[i - 1], nums[i] + dp2[i - 2]);
-    }
-    return Math.max(dp1[nums.length - 1], dp2[nums.length - 1]);
-};
+  if (nums.length === 0) return 0
+  if (nums.length === 1) return nums[0]
+  let dp1 = new Array(nums.length).fill(0)
+  let dp2 = new Array(nums.length).fill(0)
+  dp1[0] = 0
+  dp2[0] = 0
+  dp1[1] = nums[0]
+  dp2[1] = nums[1]
+  for (let i = 2; i < nums.length; ++i) {
+    dp1[i] = Math.max(dp1[i - 1], nums[i - 1] + dp1[i - 2])
+  }
+  for (let i = 2; i < nums.length; ++i) {
+    dp2[i] = Math.max(dp2[i - 1], nums[i] + dp2[i - 2])
+  }
+  return Math.max(dp1[nums.length - 1], dp2[nums.length - 1])
+}
 
-var rob = function(nums) {
-    let len = nums.length;
+var rob = function (nums) {
+  let len = nums.length
 
-    if(len === 0) return 0;
-    if(len === 1) return nums[0];
-    if(len === 2) return Math.max(nums[0], nums[1]);
+  if (len === 0) return 0
+  if (len === 1) return nums[0]
+  if (len === 2) return Math.max(nums[0], nums[1])
 
-    let dp = new Array(len).fill(0);
-    let dp1 = new Array(len).fill(0);
-    // 需要拆分为两种情况
-    // 1.选择第一个
-    // 2.没有选择第一个
-    // 最后结果取两种的最大值
+  let dp = new Array(len).fill(0)
+  let dp1 = new Array(len).fill(0)
+  // 需要拆分为两种情况
+  // 1.选择第一个
+  // 2.没有选择第一个
+  // 最后结果取两种的最大值
 
-    dp[0] = 0;
-    dp[1] = nums[1];
-    dp1[0] = nums[0];
-    dp1[1] = Math.max(nums[0], nums[1]);
+  dp[0] = 0
+  dp[1] = nums[1]
+  dp1[0] = nums[0]
+  dp1[1] = Math.max(nums[0], nums[1])
 
-    // 选择了第一个
-    for(let i = 2;i < len;i++) {
-        dp[i] = Math.max(dp[i - 1], nums[i] + dp[i - 2])
-    }
+  // 选择了第一个
+  for (let i = 2; i < len; i++) {
+    dp[i] = Math.max(dp[i - 1], nums[i] + dp[i - 2])
+  }
 
-    // 没有选择第一个
-    for(let i = 2;i < len - 1;i++) {
-        dp1[i] = Math.max(dp1[i - 1], nums[i] + dp1[i - 2])
-    }
+  // 没有选择第一个
+  for (let i = 2; i < len - 1; i++) {
+    dp1[i] = Math.max(dp1[i - 1], nums[i] + dp1[i - 2])
+  }
 
-    return Math.max(dp[len - 1], dp1[len - 2])
-};
+  return Math.max(dp[len - 1], dp1[len - 2])
+}

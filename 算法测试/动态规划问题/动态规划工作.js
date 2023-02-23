@@ -70,7 +70,7 @@ var jobScheduling = function (startTime, endTime, profit) {
   }
   jobs.sort(([s1, e1], [s2, e2]) => e1 - e2) // 按照endTime排序
 
-  // console.log(jobs)
+  console.log(jobs)
 
   // 动态规划
   const dp = [[0, 0]] // 记录每个状态下的最大收益 [endTime, profit]
@@ -84,7 +84,8 @@ var jobScheduling = function (startTime, endTime, profit) {
     }
     console.log(`这是第${i + 1}次运行，当前的最大收益是${dp[dp.length - 1][1]}`);
   }
-  // console.log(dp)
+  
+  console.log(dp)
   return dp[dp.length - 1][1]
 }
 
@@ -124,4 +125,4 @@ var jobScheduling1 = function (startTime, endTime, profit) {
 }
 
 // let a = jobScheduling([1, 2, 3, 3],[3, 4, 5, 6],[50, 10, 40, 70])
-let b = jobScheduling1([1, 3, 0, 4, 3, 5, 6, 8], [4, 5, 6, 7, 8, 9, 10, 11], [5, 1, 8, 4, 6, 3, 2, 4])
+let b = jobScheduling([1, 3, 0, 4, 3, 5, 6, 8], [4, 5, 6, 7, 8, 9, 10, 11], [5, 1, 8, 4, 6, 3, 2, 4])

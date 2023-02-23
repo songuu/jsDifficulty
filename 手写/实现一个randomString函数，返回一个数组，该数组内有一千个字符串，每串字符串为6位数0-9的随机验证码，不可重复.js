@@ -1,9 +1,3 @@
-/*
- * @Author: songyu
- * @Date: 2021-06-11 16:28:40
- * @LastEditor: songyu
- * @LastEditTime: 2021-06-11 16:29:42
- */
 // 实现一个randomString函数，返回一个数组，该数组内有一千个字符串，每串字符串为6位数0-9的随机验证码，不可重复。
 function randomString() {
   const resArr = []

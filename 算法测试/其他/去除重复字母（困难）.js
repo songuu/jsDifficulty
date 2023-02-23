@@ -20,37 +20,41 @@
         往栈中推入当前元素
 */
 
-/* const repeatNum = (str) => {
-    if(str.length === 0) {
-        return str;
-    }
+const repeatNum = (str) => {
+  if (str.length === 0) {
+    return str
+  }
 
-    let obj = {};
+  let obj = {}
 
-    for(let i of str) {
-        let keys = Object.keys(obj);
-        if(keys.indexOf(i) > -1) {
-            obj[i]++;
-            continue;
-        } else {
-            obj[i] = 1;
-        }
+  for (let i of str) {
+    let keys = Object.keys(obj)
+    if (keys.indexOf(i) > -1) {
+      obj[i]++
+      continue
+    } else {
+      obj[i] = 1
     }
+  }
 
-    return Object.keys(obj).join('');
-}
- */
-var repeatNum = (s) => {
-    var stack = []
-    for (var i = 0; i < s.length; i++) {
-        var char = s[i]
-        if (stack.indexOf(char) > -1) continue;
-        while (stack.length > 0 && stack[stack.length - 1] > char && s.indexOf(stack[stack.length - 1], i) > i) {
-            stack.pop()
-        }
-        stack.push(char)
-    }
-    return stack.join('')
+  return Object.keys(obj).join('')
 }
 
-console.log(repeatNum('cbacdcbc'))
+var repeatNum1 = (s) => {
+  var stack = []
+  for (var i = 0; i < s.length; i++) {
+    var char = s[i]
+    if (stack.indexOf(char) > -1) continue
+    while (
+      stack.length > 0 &&
+      stack[stack.length - 1] > char &&
+      s.indexOf(stack[stack.length - 1], i) > i
+    ) {
+      stack.pop()
+    }
+    stack.push(char)
+  }
+  return stack.join('')
+}
+
+console.log(repeatNum1('cbacdcbc'))

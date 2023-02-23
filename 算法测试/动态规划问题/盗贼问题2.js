@@ -130,6 +130,6 @@ var rob2 = function (root) {
   return Math.max(money, rob(root.left) + rob(root.right))
 }
 
-let a = rob([3, 2, 3, null, 3, null, 1])
+let a = rob2([3, 2, 3, null, 3, null, 1])
 
 console.log(a)

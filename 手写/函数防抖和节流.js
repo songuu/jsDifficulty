@@ -1,11 +1,3 @@
-/*
- * @Author: songyu
- * @Date: 2021-05-31 21:00:41
- * @LastEditTime: 2021-06-24 17:13:07
- * @LastEditors: Please set LastEditors
- * @Description: 
- * @FilePath: \项目文件\jsDifficulty\面试题测试\手写\函数防抖和节流.js
- */
 // 防抖
 // 输入框事件
 const debounce = (fn, time) => {

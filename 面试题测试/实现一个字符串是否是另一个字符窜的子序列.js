@@ -1,74 +1,67 @@
-/*
- * @Author: songyu
- * @Date: 2021-05-19 17:57:42
- * @LastEditor: songyu
- * @LastEditTime: 2021-05-19 18:55:55
- */
 /**
- * @description:   
-  * * 给定两个字符窜 s1 和 s2 
-  * 1. s1 = "ab" s2 = "dsffgsbasa" 
-  * 2. s1 = "ab" s2 = "dsffgssa" 
+ * @description:
+ * * 给定两个字符窜 s1 和 s2
+ * 1. s1 = "ab" s2 = "dsffgsbasa"
+ * 2. s1 = "ab" s2 = "dsffgssa"
  * @param {*}
  * @return {*}
  */
 
-/* 
-  * 取出s1的全排列， 然后看s2 是否包含 s1
-*/
+/*
+ * 取出s1的全排列， 然后看s2 是否包含 s1
+ */
 
-const makeSomeSame = (s1: string, s2: string) => {
-  let len1 = s1.length;
-  let len2 = s2.length;
+const makeSomeSame = (s1, s2) => {
+  let len1 = s1.length
+  let len2 = s2.length
 
   if (len1 > len2) {
-    return false;
+    return false
   }
 
-  const map1 = {};
-  const map2 = {};
+  const map1 = {}
+  const map2 = {}
 
   for (let i = 0; i < len1; i++) {
-    map1[s1[i]] = map1[s1[i]] ? map1[s1[i]] + 1 : 1;
-    map2[s1[i]] = map2[s1[i]] ? map2[s1[i]] + 1 : 1;
+    map1[s1[i]] = map1[s1[i]] ? map1[s1[i]] + 1 : 1
+    map2[s1[i]] = map2[s1[i]] ? map2[s1[i]] + 1 : 1
   }
-
-  console.log(map1)
-  console.log(map2)
 
   function match(o1, o2) {
     for (let i in o1) {
       if (o1[i] !== o2[i]) {
-        return false;
+        return false
       }
     }
-    return true;
+    return true
   }
 
   for (let k = 0; k <= len2 - len1; k++) {
     if (match(map1, map2)) {
-      return true;
+      return true
     } else {
       map2[s2[k + len1]] = map2[s2[k + len1]] ? map2[s2[k + len1]] + 1 : 1
       map2[s2[k]] = map2[s2[k]] - 1
     }
   }
 
-  return false;
+  console.log(map1, map2)
+
+  return false
 }
 
 // 首先做s1 的全排列
-const makeSomeSame1 = (s1: string, s2: string) => {
-  let len1 = s1.length;
-  let len2 = s2.length;
+const makeSomeSame1 = (s1, s2) => {
+  let len1 = s1.length
+  let len2 = s2.length
 
   if (len1 > len2) {
-    return false;
+    return false
   }
 
-  let s3 = permute2(s1.split("")).reduce(function (prev, cur) {
-    return prev.concat(cur.join(""));
-  }, []);
+  let s3 = permute2(s1.split('')).reduce(function (prev, cur) {
+    return prev.concat(cur.join(''))
+  }, [])
 
   console.log(s3)
   console.log(s2)
@@ -79,8 +72,9 @@ const makeSomeSame1 = (s1: string, s2: string) => {
     }
   }
 
-  return false;
+  return false
 }
+
 function permute2(nums) {
   let res = []
   perm1(nums, 0, nums.length - 1, res)
@@ -106,10 +100,7 @@ function swap1(arr, p, q) {
   ;[arr[p], arr[q]] = [arr[q], arr[p]]
 }
 
+let s1 = 'ab'
+let s2 = 'ffafafaasasba'
 
-
-
-let s1: string = "ab";
-let s2: string = "ffafafaasasba";
-
-console.log(makeSomeSame1(s1, s2))
+console.log(makeSomeSame(s1, s2))

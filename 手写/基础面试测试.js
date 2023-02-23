@@ -1,9 +1,3 @@
-/*
- * @Author: songyu
- * @Date: 2021-06-13 11:45:12
- * @LastEditor: songyu
- * @LastEditTime: 2021-07-06 11:48:20
- */
 // * 可选链
 const person = {
   firstName: "Lydia",
@@ -17,10 +11,10 @@ const person = {
   },
 };
 
-// console.log(person.pet?.name);
-// console.log(person.pet?.family?.name);
-// console.log(person.getFullName?.());
-// console.log(member.getLastName?.());
+/* console.log(person.pet?.name);
+console.log(person.pet?.family?.name);
+console.log(person.getFullName?.());
+console.log(person.getLastName?.()); */
 
 // * es7 中间的setter和getter
 const config = {
@@ -48,9 +42,9 @@ set.has(1);
 /* 
 	defineProperty 添加属性 但是需要指定是否可以迭代
 */
-const person = { name: "Lydia" };
+const person1 = { name: "Lydia" };
 
-Object.defineProperty(person, "age", { value: 21 });
+Object.defineProperty(person1, "age", { value: 21 });
 
 console.log(person);
 console.log(Object.keys(person));

@@ -1,9 +1,3 @@
-/*
- * @Author: songyu
- * @Date: 2021-06-01 09:19:08
- * @LastEditor: songyu
- * @LastEditTime: 2021-06-01 09:22:15
- */
 // 模拟实现Promise
 // Promise利用三大手段解决回调地狱：
 // 1. 回调函数延迟绑定

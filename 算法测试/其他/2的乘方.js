@@ -1,10 +1,4 @@
 /*
- * @Author: songyu
- * @Date: 2021-05-31 16:37:39
- * @LastEditor: songyu
- * @LastEditTime: 2021-05-31 16:37:59
- */
-/*
 我的实现 
 首先判断数值的大小
 */
@@ -44,4 +38,4 @@ function check1(num) {
   }
 }
 
-console.log(check1(8))
+console.log(check1(8), 9 & (9 - 1))

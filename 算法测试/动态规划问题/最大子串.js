@@ -17,3 +17,5 @@ const getMaxString = (nums) => {
   }
   return res
 }
+
+console.log(getMaxString([1, -2, 3, 10, -4, 7, 2, -5]))

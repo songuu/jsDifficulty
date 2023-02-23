@@ -68,7 +68,10 @@ const camelMulcase = (strs, str111) => {
   return str111;
 }
 
-/* let aaaa = 'ab-ba'.replace(/(?!^)\-(\w)(\w+)/g, function (a, b, c) {
+let aaaa = 'ab-b12a21-ab'.replace(/(?!^)\-(\w)(\w+)/g, function (a, b, c) {
+  console.log(a)
+  console.log(b)
+  console.log(c)
   return b.toUpperCase() + c.toLowerCase()
 })
 
@@ -76,8 +79,8 @@ let bbbb = 'a_b'.replace(/(?!^)\_(\w)(\w*)/g, function (a, b, c) {
   return b.toUpperCase() + c.toLowerCase()
 })
 
-console.log(aaaa)
-console.log(bbbb) */
+// console.log(aaaa)
+// console.log(bbbb)
 
 let result = deepMapKeys(b)
 
