@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <input type="file" id="file" />
+  <script src="./upng.js"></script>
+  <script>
+    document.querySelector("#file").addEventListener("change", function () {
+      const file = document.querySelector("#file").files[0]
+
+      console.log("file", file)
+
+      const rgba = UPNG.toRGBA8(file)[0];
+      console.log("rgba", rgba)
+    })
+  </script>
+</body>
+
+</html>

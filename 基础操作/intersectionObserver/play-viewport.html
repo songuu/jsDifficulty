@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>IntersectionObserver Example-04</title>
+  <style>
+    body div {
+      height: 500px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="element1" data-action="play"></div>
+  <div id="element2" data-action="pause"></div>
+  <div id="element3" data-action="stop"></div>
+
+  <script>
+    var elements = [].slice.call(document.querySelectorAll("[data-action]"));
+    var videoPlayer = {
+      play: function () {
+        console.log("Playing video...");
+      },
+      pause: function () {
+        console.log("Pausing video...");
+      },
+      stop: function () {
+        console.log("Stopping video...");
+      }
+    };
+
+    if ("IntersectionObserver" in window) {
+      var observer = new IntersectionObserver(function (entries, observer) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            var el = entry.target;
+            var action = el.getAttribute("data-action");
+            videoPlayer[action]();
+            observer.unobserve(el);
+          }
+        });
+      });
+
+      elements.forEach(function (el) {
+        observer.observe(el);
+      });
+    }
+  </script>
+</body>
+
+</html>

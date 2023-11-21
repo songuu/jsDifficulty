@@ -1,0 +1,1 @@
+// https://blog.maxiaobo.com.cn/type-challenge

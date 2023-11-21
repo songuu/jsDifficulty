@@ -1,0 +1,14 @@
+#container {
+	width: 960px;
+}
+
+.col-four .col {
+	float: left;
+	margin: 0 10px;
+	width: 220px;
+}
+
+.col-four .col h2 {
+	padding-left: 10px;
+	width: 210px;
+}

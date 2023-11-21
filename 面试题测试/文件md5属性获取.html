@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>md5文件操作</title>
+</head>
+
+<body>
+  <input type="file" id="file">
+  <script src="https://cdn.bootcdn.net/ajax/libs/spark-md5/3.0.2/spark-md5.min.js"></script>
+  <script>
+    document.querySelector('#file').addEventListener('change', e => {
+      const file = e.target.files[0];
+      const sliceLength = 10;
+      const chunkSize = Math.ceil(file.size / sliceLength);
+      const fileReader = new FileReader();
+      const md5 = new SparkMD5();
+      let index = 0;
+      const loadFile = () => {
+        const slice = file.slice(index, index + chunkSize);
+
+        console.log("分片数据", slice)
+        fileReader.readAsBinaryString(slice);
+      }
+      loadFile();
+      fileReader.onload = e => {
+        md5.appendBinary(e.target.result);
+        if (index < file.size) {
+          index += chunkSize;
+          loadFile();
+        } else {
+          console.log(md5.end());
+        }
+      };
+    });
+  </script>
+</body>
+
+</html>

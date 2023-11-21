@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>IntersectionObserver Example</title>
+  <style>
+    .product-card {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      width: 300px;
+      height: 400px;
+      margin: 10px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      box-shadow: 2px 2px 3px #ccc;
+    }
+
+    .product-card img {
+      width: 100%;
+      height: auto;
+    }
+
+    .product-card h3 {
+      margin-top: 10px;
+    }
+
+    .product-card p {
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    .loading {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 50px;
+      margin: 10px 0;
+    }
+
+    .loading span {
+      font-size: 1.2rem;
+      color: #999;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="product-container">
+    <!-- Products will be added here -->
+  </div>
+  <div class="loading">
+    <span>Loading...</span>
+  </div>
+
+  <script>
+    var productContainer = document.getElementById("product-container");
+    var loadingIndicator = document.querySelector(".loading");
+    var page = 0;
+    var loading = false;
+    var products = [];
+
+    function getProducts () {
+      // Fetch products from API
+      // In this example, we will use a mock data
+      var url = `https://my-json-server.typicode.com/my/server?page=${page}`;
+      loading = true;
+      return fetch(url)
+        .then(response => response.json())
+        .then(data => {
+          products = products.concat(data);
+          return products;
+        })
+        .catch(error => console.log(error));
+    }
+
+    function createProductCard (product) {
+      var productCard = document.createElement("div");
+      productCard.classList.add("product-card");
+
+      var productImage = document.createElement("img");
+      productImage.setAttribute("data-src", product.image);
+      productCard.appendChild(productImage);
+
+      var productName = document.createElement("h3");
+      productName.innerText = product.name;
+      productCard.appendChild(productName);
+
+      var productPrice = document.createElement("p");
+      productPrice.innerText = `Price
+            : ${product.price}`;
+      productCard.appendChild(productPrice); return productCard;
+    }
+
+    function addProductCards () {
+      // Create product cards for each product and add to the container
+      var fragment = document.createDocumentFragment();
+      products.forEach(product => {
+        var card = createProductCard(product);
+        fragment.appendChild(card);
+      });
+      productContainer.appendChild(fragment);
+    }
+
+    if ("IntersectionObserver" in window) {
+      var observer = new IntersectionObserver(function (entries, observer) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            if (loading) return;
+            page++;
+            getProducts().then(data => {
+              addProductCards();
+              loading = false;
+            });
+            observer.unobserve(entry.target);
+          }
+        });
+      });
+
+      observer.observe(loadingIndicator);
+    }
+  </script>
+</body>
+
+</html>

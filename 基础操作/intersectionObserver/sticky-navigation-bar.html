@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>IntersectionObserver Example-05</title>
+  <style>
+    /* Navigation bar styles */
+    #navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: #fff;
+      z-index: 1;
+    }
+
+    /* Styles for the placeholder element */
+    #placeholder {
+      height: 60px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="navbar">
+    <a href="#">Home</a>
+    <a href="#">About</a>
+    <a href="#">Contact</a>
+  </div>
+  <div id="placeholder"></div>
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce varius euismod augue, id tincidunt mauris tincidunt
+    vitae. Sed aliquam tempor metus, et euismod augue suscipit in. Sed vel velit vel velit semper tincidunt. Integer
+    suscipit eros euismod augue suscipit in. Sed vel velit vel velit semper tincidunt. Integer suscipit eros euismod
+    augue suscipit in. Sed vel velit vel velit semper tincidunt. Integer suscipit eros
+    ，vel velit semper tincidunt. Integer suscipit eros euismod augue suscipit in.Lorem ipsum dolor sit amet, consectetur
+    adipiscing elit. Fusce varius euismod augue, id tincidunt mauris tincidunt
+    vitae. Sed aliquam tempor metus, et euismod augue suscipit in. Sed vel velit vel velit semper tincidunt. Integer
+    suscipit eros euismod augue suscipit in. Sed vel velit vel velit semper tincidunt. Integer suscipit eros euismod
+    augue suscipit in. Sed vel velit vel velit semper tincidunt. Integer suscipit eros
+    ，vel velit semper tincidunt. Integer suscipit eros euismod augue suscipit in.Lorem ipsum dolor sit amet, consectetur
+    adipiscing elit. Fusce varius euismod augue, id tincidunt mauris tincidunt
+    vitae. Sed aliquam tempor metus, et euismod augue suscipit in. Sed vel velit vel velit semper tincidunt. Integer
+    suscipit eros euismod augue suscipit in. Sed vel velit vel velit semper tincidunt. Integer suscipit eros euismod
+    augue suscipit in. Sed vel velit vel velit semper tincidunt. Integer suscipit eros
+    ，vel velit semper tincidunt. Integer suscipit eros euismod augue suscipit in.Lorem ipsum dolor sit amet, consectetur
+    adipiscing elit. Fusce varius euismod augue, id tincidunt mauris tincidunt
+    vitae. Sed aliquam tempor metus, et euismod augue suscipit in. Sed vel velit vel velit semper tincidunt. Integer
+    suscipit eros euismod augue suscipit in. Sed vel velit vel velit semper tincidunt. Integer suscipit eros euismod
+    augue suscipit in. Sed vel velit vel velit semper tincidunt. Integer suscipit eros
+    ，vel velit semper tincidunt. Integer suscipit eros euismod augue suscipit in.Lorem ipsum dolor sit amet, consectetur
+    adipiscing elit. Fusce varius euismod augue, id tincidunt mauris tincidunt
+    vitae. Sed aliquam tempor metus, et euismod augue suscipit in. Sed vel velit vel velit semper tincidunt. Integer
+    suscipit eros euismod augue suscipit in. Sed vel velit vel velit semper tincidunt. Integer suscipit eros euismod
+    augue suscipit in. Sed vel velit vel velit semper tincidunt. Integer suscipit eros
+    ，vel velit semper tincidunt. Integer suscipit eros euismod augue suscipit in.Lorem ipsum dolor sit amet, consectetur
+    adipiscing elit. Fusce varius euismod augue, id tincidunt mauris tincidunt
+    vitae. Sed aliquam tempor metus, et euismod augue suscipit in. Sed vel velit vel velit semper tincidunt. Integer
+    suscipit eros euismod augue suscipit in. Sed vel velit vel velit semper tincidunt. Integer suscipit eros euismod
+    augue suscipit in. Sed vel velit vel velit semper tincidunt. Integer suscipit eros
+    ，vel velit semper tincidunt. Integer suscipit eros euismod augue suscipit in.Lorem ipsum dolor sit amet, consectetur
+    adipiscing elit. Fusce varius euismod augue, id tincidunt mauris tincidunt
+    vitae. Sed aliquam tempor metus, et euismod augue suscipit in. Sed vel velit vel velit semper tincidunt. Integer
+    suscipit eros euismod augue suscipit in. Sed vel velit vel velit semper tincidunt. Integer suscipit eros euismod
+    augue suscipit in. Sed vel velit vel velit semper tincidunt. Integer suscipit eros
+    ，vel velit semper tincidunt. Integer suscipit eros euismod augue suscipit in.Lorem ipsum dolor sit amet, consectetur
+    adipiscing elit. Fusce varius euismod augue, id tincidunt mauris tincidunt
+    vitae. Sed aliquam tempor metus, et euismod augue suscipit in. Sed vel velit vel velit semper tincidunt. Integer
+    suscipit eros euismod augue suscipit in. Sed vel velit vel velit semper tincidunt. Integer suscipit eros euismod
+    augue suscipit in. Sed vel velit vel velit semper tincidunt. Integer suscipit eros
+    ，vel velit semper tincidunt. Integer suscipit eros euismod augue suscipit in.Lorem ipsum dolor sit amet, consectetur
+    adipiscing elit. Fusce varius euismod augue, id tincidunt mauris tincidunt
+    vitae. Sed aliquam tempor metus, et euismod augue suscipit in. Sed vel velit vel velit semper tincidunt. Integer
+    suscipit eros euismod augue suscipit in. Sed vel velit vel velit semper tincidunt. Integer suscipit eros euismod
+    augue suscipit in. Sed vel velit vel velit semper tincidunt. Integer suscipit eros
+    ，vel velit semper tincidunt. Integer suscipit eros euismod augue suscipit in.Lorem ipsum dolor sit amet, consectetur
+    adipiscing elit. Fusce varius euismod augue, id tincidunt mauris tincidunt
+    vitae. Sed aliquam tempor metus, et euismod augue suscipit in. Sed vel velit vel velit semper tincidunt. Integer
+    suscipit eros euismod augue suscipit in. Sed vel velit vel velit semper tincidunt. Integer suscipit eros euismod
+    augue suscipit in. Sed vel velit vel velit semper tincidunt. Integer suscipit eros
+    ，vel velit semper tincidunt. Integer suscipit eros euismod augue suscipit in.</p>
+  <script>
+    var navbar = document.getElementById("navbar");
+    var placeholder = document.getElementById("placeholder");
+
+    if ("IntersectionObserver" in window) {
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          var isIntersecting = entry.isIntersecting;
+          navbar.classList.toggle("sticky", !isIntersecting);
+          placeholder.classList.toggle("visible", !isIntersecting);
+        });
+      });
+
+      observer.observe(placeholder);
+    }
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>控制台输入</title>
+</head>
+
+<body>
+    <!-- <script>
+        let start
+        let t = 0
+        function log(timestamp) {
+            start = start || timestamp
+            const elapsed = timestamp - start
+            let n = ~~(elapsed / 1000)
+            if (n != t) {
+                logK(n)
+                t = n
+            }
+            if (elapsed < 10000) {
+                requestAnimationFrame(log)
+            }
+        }
+        function logK(n) {
+            console.clear()
+            let str = ''
+            for (let i = 0; i < n; i++) {
+                str += '-'
+            }
+            console.log(`[LOG]: "${str}"`)
+        }
+        requestAnimationFrame(log)
+    </script> -->
+    <script>
+        let len = 1;
+        let preTime = new Date().getTime();
+        function log () {
+            let now = new Date().getTime();
+            if (len < 11) {
+                if (now - preTime >= 1000) {
+                    console.clear();
+                    console.log(new Array(len).fill("-").join(""))
+                    preTime = now;
+                    len++;
+                }
+                requestAnimationFrame(log)
+            }
+        }
+
+        requestAnimationFrame(log)
+    </script>
+</body>
+
+</html>

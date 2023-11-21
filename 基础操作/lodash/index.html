@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script src="./lodash.js"></script>
+  <script>
+    var object1 = {
+      'a': [{ 'b': 2 }, { 'd': 4 }]
+    };
+
+    var other1 = {
+      'a': [{ 'c': 3 }, { 'e': 5 }]
+    };
+
+    let a = merge(object1, other1);
+
+    console.log(a)
+  </script>
+</body>
+
+</html>

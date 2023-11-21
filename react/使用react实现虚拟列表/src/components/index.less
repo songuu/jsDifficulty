@@ -1,0 +1,103 @@
+.embla {
+  overflow: hidden;
+}
+.embla__container {
+  display: flex;
+}
+.embla__slide {
+  flex: 0 0 100%;
+  min-width: 0;
+}
+
+.swiper-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.swiper-items {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.swiper-item {
+  flex: 0 0 100%;
+}
+
+.swiper-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.5);
+  color: #333;
+  font-size: 24px;
+  line-height: 50px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.swiper-button:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.swiper-button.prev {
+  left: 10px;
+}
+
+.swiper-button.next {
+  right: 10px;
+}
+
+.swiper-dots {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.swiper-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: 10px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.swiper-dot:last-child {
+  margin-right: 0;
+}
+
+.swiper-dot.active {
+  background-color: #333;
+}
+
+.swiper-play,
+.swiper-pause {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background-color: rgba(255, 255, 255, 0.5);
+  color: #333;
+  font-size: 16px;
+  line-height: 32px;
+  padding: 0 16px;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.swiper-play.hide,
+.swiper-pause.hide {
+  display: none;
+}
+
+.swiper-play:hover,
+.swiper-pause:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+}

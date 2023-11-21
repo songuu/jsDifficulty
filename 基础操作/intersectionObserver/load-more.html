@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>IntersectionObserver Example-02</title>
+</head>
+
+<body>
+  <div id="content"></div>
+  <button id="load-more-button">Load More</button>
+
+  <script>
+    // 数据来源
+    var data = [
+      { name: "Item 1", image: "image1.jpg" },
+      { name: "Item 2", image: "image2.jpg" },
+      { name: "Item 3", image: "image3.jpg" },
+      { name: "Item 4", image: "image1.jpg" },
+      { name: "Item 5", image: "image2.jpg" },
+      { name: "Item 6", image: "image3.jpg" },
+      { name: "Item 7", image: "image1.jpg" },
+      { name: "Item 8", image: "image2.jpg" },
+      { name: "Item 9", image: "image3.jpg" },
+      { name: "Item 10", image: "image1.jpg" },
+      { name: "Item 11", image: "image2.jpg" },
+      { name: "Item 12", image: "image3.jpg" },
+      { name: "Item 13", image: "image1.jpg" },
+      { name: "Item 14", image: "image2.jpg" },
+      { name: "Item 15", image: "image3.jpg" },
+      { name: "Item 16", image: "image1.jpg" },
+      { name: "Item 17", image: "image2.jpg" },
+      { name: "Item 18", image: "image3.jpg" },
+      { name: "Item 19", image: "image1.jpg" },
+      { name: "Item 20", image: "image2.jpg" },
+      { name: "Item 21", image: "image3.jpg" },
+    ];
+    var currentPage = 0;
+    var pageSize = 5;
+    var loadMoreButton = document.getElementById("load-more-button");
+
+    // 加载更多按钮点击事件
+    loadMoreButton.addEventListener("click", function () {
+      loadPage();
+    });
+
+    // 加载数据
+    function loadPage () {
+      var startIndex = currentPage * pageSize;
+      var endIndex = startIndex + pageSize;
+      var items = data.slice(startIndex, endIndex);
+
+      items.forEach(function (item) {
+        var div = document.createElement("div");
+        var img = document.createElement("img");
+        var name = document.createElement("p");
+
+        img.src = "placeholder.jpg";
+        img.setAttribute("data-src", item.image);
+        img.classList.add("lazy-load");
+        name.innerHTML = item.name;
+
+        div.appendChild(img);
+        div.appendChild(name);
+        document.getElementById("content").appendChild(div);
+      });
+
+      currentPage++;
+
+      if (currentPage * pageSize >= data.length) {
+        loadMoreButton.style.display = "none";
+      }
+
+      if ("IntersectionObserver" in window) {
+        // 懒加载图像
+        var observer = new IntersectionObserver(function (entries, observer) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              var img = entry.target;
+              var src = img.getAttribute("data-src");
+              img.setAttribute("src", src);
+              img.classList.remove("lazy-load");
+              observer.unobserve(img);
+            }
+          });
+        });
+
+        var lazyImages = [].slice.call(document.querySelectorAll(".lazy-load"));
+
+        lazyImages.forEach(function (img) {
+          observer.observe(img);
+        });
+      }
+    }
+
+    // 首次加载
+    loadPage();
+    if ("IntersectionObserver" in window) {
+      // 滚动加载
+      var observer = new IntersectionObserver(function (entries, observer) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting && entry.target.id === "load-more-button") {
+            loadPage();
+          }
+        });
+      }); observer.observe(loadMoreButton);
+    }
+  </script>
+</body>
+
+</html>
