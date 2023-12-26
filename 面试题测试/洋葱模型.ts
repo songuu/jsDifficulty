@@ -20,6 +20,54 @@ console.log(b)
 const chain = [add5, div2, sub3].reduce((a, b) => (x: number) => a(b(x)));
 const chain1 = [add5, div2, sub3].reduce((b, a) => (x: number) => b(a(x)));
 
-
 console.log(chain(1))
 console.log(chain1(1))
+
+type Middleware<T> = (context: T, next: () => Promise<void>) => Promise<void> | void;
+type Context = { [key: string]: any }; // 可根据需要自定义上下文类型
+
+class OnionModel<T> {
+  private middlewares: Middleware<T>[] = [];
+
+  // 用于注册中间件
+  use(middleware: Middleware<T>) {
+    this.middlewares.push(middleware);
+  }
+
+  // 执行中间件
+  async execute(context: T) {
+    const dispatch = async (i: number): Promise<void> => {
+      if (i < this.middlewares.length) {
+        const middleware = this.middlewares[i];
+        await middleware(context, () => dispatch(i + 1));
+      }
+    };
+
+    await dispatch(0);
+  }
+}
+
+const app = new OnionModel<Context>();
+
+// 注册中间件
+app.use(async (ctx, next) => {
+  console.log('Middleware 1 before');
+  ctx.middleware1 = true; // 可以修改上下文
+  await next();
+  console.log('Middleware 1 after');
+});
+
+app.use(async (ctx, next) => {
+  console.log('Middleware 2 before');
+  await next();
+  console.log('Middleware 2 after');
+});
+
+app.use(async (ctx, next) => {
+  console.log('Middleware 3');
+  await next(); // 可选，因为这是最后一个中间件
+});
+
+// 执行中间件
+app.execute({}).then(() => console.log('All middlewares executed'));
+

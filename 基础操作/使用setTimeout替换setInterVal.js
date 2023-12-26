@@ -12,3 +12,22 @@ function interval(func, wait) {
   }
   timer = setTimeout(interv, wait)
 }
+
+let lastTime = 0
+
+function setIntervalWithRAF(callback, interval) {
+  function frame(time) {
+    if (time - lastTime >= interval) {
+      callback()
+      lastTime = time
+    }
+    requestAnimationFrame(frame)
+  }
+
+  requestAnimationFrame(frame)
+}
+
+// 使用示例
+const intervalId = setIntervalWithRAF(() => {
+  console.log('Hello at animation frame interval')
+}, 2000)

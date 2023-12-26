@@ -4,7 +4,7 @@
  原生 DOM API 实现该需求（不用考虑陈旧浏览器以及在现代浏览器中的兼容性，可以使用任意
  浏览器的最新特性；不用考虑 shadow DOM）。比如在如下页面中运行后：
  */
-<html>
+;<html>
   <head></head>
   <body>
     <div>
@@ -13,7 +13,7 @@
       <span>o</span>
     </div>
   </body>
-</html>;
+</html>
 /* 会输出：
 
 {
@@ -21,3 +21,14 @@
   maxDOMTreeDepth: 4,
   maxChildrenCount: 3
 } */
+
+// 统计dom元素的类型
+const hash = {}
+document.querySelectorAll('*').forEach((item) => {
+  const key = item.tagName.toLowerCase()
+  if (hash[key]) {
+    hash[key]++
+  } else {
+    hash[key] = 1
+  }
+})

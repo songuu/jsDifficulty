@@ -138,7 +138,7 @@ function compareDate() {
   },
 ] */
 
-const data = [];
+const data = []
 // 对数组循环， 判断数据有效性；将时间转换为时间戳，并给同一时段打上相同标记， 不同时段的标记不同
 let tempList = []
 
@@ -303,3 +303,46 @@ console.log(widObj)
 // intersection([1, 6], [4, 9])
 
 // getIntersection([1, 7], [8, 9])
+
+function getIntersection2(...intervals) {
+  // 规范化区间，确保每个区间的第一个元素小于等于第二个元素
+  let normalizedIntervals = intervals.map((interval) =>
+    interval[0] <= interval[1] ? interval : [interval[1], interval[0]]
+  )
+
+  // 寻找所有区间的最大开始点和最小结束点
+  let start = -Infinity
+  let end = Infinity
+
+  for (let interval of normalizedIntervals) {
+    if (interval[0] > start) start = interval[0]
+    if (interval[1] < end) end = interval[1]
+  }
+
+  // 检查是否存在交集
+  if (start > end) return null
+
+  return [start, end]
+}
+
+function getIntersection3(...intervals) {
+  let start = -Infinity
+  let end = Infinity
+
+  for (let interval of intervals) {
+    // 直接比较区间端点，无需排序
+    let [a, b] = interval
+    let min = Math.min(a, b)
+    let max = Math.max(a, b)
+
+    if (min > start) start = min
+    if (max < end) end = max
+  }
+
+  // 检查是否存在交集
+  if (start > end) return null
+
+  return [start, end]
+}
+
+console.log(getIntersection3([1, 7], [5, 9]))
