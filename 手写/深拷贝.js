@@ -1,9 +1,3 @@
-/*
- * @Author: songyu
- * @Date: 2021-06-01 09:11:46
- * @LastEditor: songyu
- * @LastEditTime: 2021-06-09 08:40:51
- */
 // * 1 使用递归
 const cloneDeep1 = (target, hash = new WeakMap()) => {
   // 对于传入参数处理

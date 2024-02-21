@@ -1,11 +1,3 @@
-/*
- * @Author: songyu
- * @Date: 2021-07-05 21:27:40
- * @LastEditTime: 2021-07-05 21:27:41
- * @LastEditors: songyu
- * @Description:
- * @FilePath: \项目文件\jsDifficulty\webpack\webpack插件\firstPluginInfo.js
- */
 class firstPlugin {
   constructor(options) {
     this.options = options;

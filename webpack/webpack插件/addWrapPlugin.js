@@ -1,10 +1,4 @@
 /*
- * @Author: songyu
- * @Date: 2021-08-06 10:55:36
- * @LastEditor: songyu
- * @LastEditTime: 2021-08-06 11:02:48
- */
-/*
  * 添加额外的插件包裹
  */
 const { ConcatSource } = require('webpack-sources')

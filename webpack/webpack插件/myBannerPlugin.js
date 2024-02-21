@@ -1,11 +1,3 @@
-/*
- * @Author: songyu
- * @Date: 2021-08-15 16:58:28
- * @LastEditTime: 2021-08-15 16:59:09
- * @LastEditors: songyu
- * @Description:
- * @FilePath: \项目文件\jsDifficulty\webpack\webpack插件\myBannerPlugin.js
- */
 const { Dependency, Template } = require("webpack");
 
 class DemoDependency extends Dependency {
